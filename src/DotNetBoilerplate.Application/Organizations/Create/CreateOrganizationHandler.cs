@@ -3,26 +3,27 @@ using DotNetBoilerplate.Shared.Abstractions.Commands;
 using DotNetBoilerplate.Shared.Abstractions.Contexts;
 using DotNetBoilerplate.Shared.Abstractions.Time;
 
-namespace DotNetBoilerplate.Application.Organizations.Create
+namespace DotNetBoilerplate.Application.Organizations.Create;
+
+internal sealed class CreateOrganizationHandler(
+    IOrganizationsRepository organizationsRepository,
+    IContext context,
+    IClock clock
+) : ICommandHandler<CreateOrganizationCommand, Guid>
 {
-    internal sealed class CreateOrganizationHandler(
-        IOrganizationsRepository organizationsRepository,
-        IContext context,
-        IClock clock
-        ) : ICommandHandler<CreateOrganizationCommand>
+    public async Task<Guid> HandleAsync(CreateOrganizationCommand command)
     {
-        public async Task HandleAsync( CreateOrganizationCommand command )
-        {
-            var isNameUnique = await organizationsRepository.IsOrganizationNameUniqueAsync(command.Name);
+        var isNameUnique = await organizationsRepository.IsOrganizationNameUniqueAsync(command.Name, null);
 
-            var organization = Organization.Create(
-                command.Name,
-                context.Identity.Id,
-                clock.Now(),
-                isNameUnique
-                );
+        var organization = Organization.Create(
+            command.Name,
+            context.Identity.Id,
+            clock.Now(),
+            isNameUnique
+        );
 
-            await organizationsRepository.AddAsync( organization );
-        }
+        await organizationsRepository.AddAsync(organization);
+
+        return organization.Id;
     }
 }
