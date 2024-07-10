@@ -17,7 +17,7 @@ public class CreaeOrganiationHandlerTests
         // Arrange
         var command = new CreateOrganizationCommand("Test Organization");
         var organizationsRepository = Substitute.For<IOrganizationsRepository>();
-        organizationsRepository.IsOrganizationNameUniqueAsync(command.Name).Returns(false);
+        organizationsRepository.IsOrganizationNameUniqueAsync(command.Name, null).Returns(false);
 
         var context = Substitute.For<IContext>();
         context.Identity.Id.Returns(Guid.NewGuid());

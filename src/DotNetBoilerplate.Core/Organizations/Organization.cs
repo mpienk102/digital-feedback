@@ -1,36 +1,42 @@
 ﻿using DotNetBoilerplate.Core.Organizations.Exceptions;
 
-namespace DotNetBoilerplate.Core.Organizations
+namespace DotNetBoilerplate.Core.Organizations;
+
+public class Organization
 {
-    public class Organization
+    private Organization()
     {
-        private Organization() { }
-        public Guid Id { get; private set; }
-        public string Name { get; private set; }
-        public Guid OwnerId { get; private set; }
-        public DateTimeOffset CreatedAt { get; private set; }
+    }
 
-        public void UpdateName(string name)
-        {
-            Name = name;
-        }
-        public static Organization Create(
-            string name,
-            Guid ownerId,
-            DateTimeOffset now,
-            bool nameIsUnique
-            )
-        {
-            if (!nameIsUnique)
-                throw new OrganizationNameIsNotUniqueException();
+    public Guid Id { get; private set; }
+    public string Name { get; private set; }
+    public Guid OwnerId { get; private set; }
+    public DateTimeOffset CreatedAt { get; private set; }
 
-            return new Organization
-            {
-                Id = Guid.NewGuid(),
-                Name = name,
-                OwnerId = ownerId,
-                CreatedAt = now
-            };
-        }
+    public void UpdateName(string name, bool nameIsUnique)
+    {
+        if (!nameIsUnique)
+            throw new OrganizationNameIsNotUniqueException();
+
+        Name = name;
+    }
+
+    public static Organization Create(
+        string name,
+        Guid ownerId,
+        DateTimeOffset now,
+        bool nameIsUnique
+    )
+    {
+        if (!nameIsUnique)
+            throw new OrganizationNameIsNotUniqueException();
+
+        return new Organization
+        {
+            Id = Guid.NewGuid(),
+            Name = name,
+            OwnerId = ownerId,
+            CreatedAt = now
+        };
     }
 }
