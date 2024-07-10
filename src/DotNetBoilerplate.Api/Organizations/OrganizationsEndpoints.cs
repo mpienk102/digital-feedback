@@ -10,6 +10,7 @@
             var group = app.MapGroup(BasePath).WithTags(Tags);
 
             group.MapEndpoint<CreateOrganizationEndpoint>();
+            group.MapEndpoint<UpdateOrganizationEndpoint>();
         }
     }
 }

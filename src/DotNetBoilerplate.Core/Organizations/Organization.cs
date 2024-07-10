@@ -9,6 +9,11 @@ namespace DotNetBoilerplate.Core.Organizations
         public string Name { get; private set; }
         public Guid OwnerId { get; private set; }
         public DateTimeOffset CreatedAt { get; private set; }
+
+        public void UpdateName(string name)
+        {
+            Name = name;
+        }
         public static Organization Create(
             string name,
             Guid ownerId,
