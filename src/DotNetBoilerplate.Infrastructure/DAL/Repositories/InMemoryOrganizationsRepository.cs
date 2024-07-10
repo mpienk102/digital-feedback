@@ -40,4 +40,9 @@ internal sealed class InMemoryOrganizationsRepository : IOrganizationsRepository
 
         return Task.FromResult(organization is null || organization.Id == currentOrganizationId);
     }
+
+    public Task<List<Organization>> GetAllAsync()
+    {
+        return Task.FromResult(organizations);
+    }
 }
