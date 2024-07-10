@@ -11,6 +11,7 @@
 
             group.MapEndpoint<CreateOrganizationEndpoint>();
             group.MapEndpoint<UpdateOrganizationEndpoint>();
+            group.MapEndpoint<ReadOrganizationEndpoint>();
         }
     }
 }
