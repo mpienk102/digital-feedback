@@ -14,7 +14,7 @@ namespace DotNetBoilerplate.Core.Projects
         public void UpdateName(string name, bool nameIsUnique)
         {
             if (!nameIsUnique)
-                //throw new OrganizationNameIsNotUniqueException();
+                //throw new ProjectNameIsNotUniqueException();
 
             Name = name;
         }
