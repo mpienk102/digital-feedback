@@ -1,4 +1,4 @@
-﻿using DotNetBoilerplate.Core.Organizations.Exceptions;
+﻿//using DotNetBoilerplate.Core.Projects.Exceptions;
 
 namespace DotNetBoilerplate.Core.Projects
 {

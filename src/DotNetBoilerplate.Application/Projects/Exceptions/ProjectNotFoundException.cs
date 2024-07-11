@@ -1,7 +1,7 @@
 ﻿using DotNetBoilerplate.Shared.Abstractions.Exceptions;
 
 
-namespace DotNetBoilerplate.Application.Project.Exceptions
+namespace DotNetBoilerplate.Application.Projects.Exceptions
 {
     internal class ProjectNotFoundException : CustomException
     {
