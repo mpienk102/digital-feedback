@@ -10,6 +10,8 @@
             var group = app.MapGroup(BasePath).WithTags(Tags);
 
             group.MapEndpoint<CreateProjectEndpoint>();
+            group.MapEndpoint<ReadProjectEndpoint>();
+            group.MapEndpoint<ReadProjectByIdEndpoint>();
         }
     }
 }
