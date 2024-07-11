@@ -1,4 +1,5 @@
 ﻿using DotNetBoilerplate.Core.Organizations;
+using DotNetBoilerplate.Core.Projects;
 using DotNetBoilerplate.Core.Users;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -11,6 +12,8 @@ internal static class Extensions
         services.AddScoped<IUserRepository, PostgresUserRepository>();
 
         services.AddSingleton<IOrganizationsRepository, InMemoryOrganizationsRepository>();
+
+        services.AddSingleton<IProjectRepository, InMemoryProjectsRepository>();
         
         return services;
     }
