@@ -12,6 +12,7 @@
             group.MapEndpoint<CreateProjectEndpoint>();
             group.MapEndpoint<ReadProjectEndpoint>();
             group.MapEndpoint<ReadProjectByIdEndpoint>();
+            group.MapEndpoint<UpdateProjectEndpoint>();
         }
     }
 }
