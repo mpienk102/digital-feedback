@@ -29,14 +29,14 @@ internal sealed class UpdateOrganizationEndpoint : IEndpoint
 
         await commandDispatcher.DispatchAsync(command, ct);
 
-        return Results.Ok();
 
-       // return TypedResults.Ok(new Response(id, request.Name));
+        return TypedResults.Ok(new Response(id));
+
+        // return TypedResults.Ok(new Response(id, request.Name));
     }
-    /*internal sealed record Response(
-        Guid Id,
-        string Name
-    );*/
+    internal sealed record Response(
+        Guid Id
+    );
     private sealed class Request
     {
         [Required] public string Name { get; init; }
