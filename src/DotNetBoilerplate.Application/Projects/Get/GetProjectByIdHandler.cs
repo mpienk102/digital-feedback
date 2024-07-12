@@ -1,17 +1,18 @@
 ﻿using DotNetBoilerplate.Core.Organizations.Exceptions;
 using DotNetBoilerplate.Core.Projects;
 using DotNetBoilerplate.Shared.Abstractions.Commands;
+using DotNetBoilerplate.Shared.Abstractions.Queries;
 
 namespace DotNetBoilerplate.Application.Projects.Read
 {
-    internal sealed class ReadProjectByIdHandler (
+    internal sealed class GetProjectByIdHandler (
         IProjectRepository projectRepository    
-    ) : ICommandHandler<ReadProjectByIdCommand, ProjectDto>
+    ) : IQueryHandler<GetProjectByIdQuery, ProjectDto>
     {
-        public async Task<ProjectDto> HandleAsync(ReadProjectByIdCommand command )
+        public async Task<ProjectDto> HandleAsync(GetProjectByIdQuery query )
         {
-            var project = await projectRepository.GetByIdAsync( command.Id );
-            if (project is null) throw new ProjectIsNullException(command.Id);
+            var project = await projectRepository.GetByIdAsync(query.Id );
+            if (project is null) throw new ProjectIsNullException(query.Id);
 
             return new ProjectDto(
                 project.Id,

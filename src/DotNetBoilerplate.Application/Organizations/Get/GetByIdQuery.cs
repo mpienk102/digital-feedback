@@ -1,7 +1,8 @@
 ﻿using DotNetBoilerplate.Shared.Abstractions.Commands;
+using DotNetBoilerplate.Shared.Abstractions.Queries;
 using System.Windows.Input;
 
 namespace DotNetBoilerplate.Application.Organizations.Read
 {
-    public sealed class ReadOrganizationCommand : ICommand<List<OrganizationDto>>;
+    public record GetByIdQuery(Guid Id) : IQuery<OrganizationDto>;
 }

@@ -1,14 +1,15 @@
 ﻿using DotNetBoilerplate.Core.Organizations;
 using DotNetBoilerplate.Shared.Abstractions.Commands;
+using DotNetBoilerplate.Shared.Abstractions.Queries;
 using System.Linq;
 
 namespace DotNetBoilerplate.Application.Organizations.Read
 {
-    internal sealed class ReadOrganizationHandler(
+    internal sealed class GetOrganizationHandler(
         IOrganizationsRepository organizationsRepository
-        ) : ICommandHandler<ReadOrganizationCommand, List<OrganizationDto>>
+        ) : IQueryHandler<GetOrganizationQuery, List<OrganizationDto>>
     {
-        public async Task<List<OrganizationDto>> HandleAsync(ReadOrganizationCommand command)
+        public async Task<List<OrganizationDto>> HandleAsync(GetOrganizationQuery query)
         {
             var organizations = await organizationsRepository.GetAllAsync();
             return organizations.Select(o => new OrganizationDto(o.Id, o.Name, o.OwnerId, o.CreatedAt.UtcDateTime)).ToList();
