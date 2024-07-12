@@ -1,6 +1,8 @@
-﻿using DotNetBoilerplate.Core.Organizations;
+﻿using DotNetBoilerplate.Application.Projects.Read;
+using DotNetBoilerplate.Core.Organizations;
 using DotNetBoilerplate.Core.Projects;
 using DotNetBoilerplate.Core.Users;
+using DotNetBoilerplate.Shared.Abstractions.Queries;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace DotNetBoilerplate.Infrastructure.DAL.Repositories;
@@ -14,7 +16,7 @@ internal static class Extensions
         services.AddSingleton<IOrganizationsRepository, InMemoryOrganizationsRepository>();
 
         services.AddSingleton<IProjectRepository, InMemoryProjectsRepository>();
-        
+
         return services;
     }
 }

@@ -1,11 +1,12 @@
 ﻿using DotNetBoilerplate.Application.Projects.Read;
 using DotNetBoilerplate.Shared.Abstractions.Commands;
+using DotNetBoilerplate.Shared.Abstractions.Queries;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DotNetBoilerplate.Api.Projects
 {
-    public class ReadProjectEndpoint : IEndpoint
+    public class GetProjectEndpoint : IEndpoint
     {
         public static void Map(IEndpointRouteBuilder app)
         {
@@ -15,13 +16,13 @@ namespace DotNetBoilerplate.Api.Projects
         }
 
         private static async Task<Ok<List<ProjectDto>>> Handle(
-            [FromServices] ICommandDispatcher commandDispatcher,
+            [FromServices] IQueryDispatcher queryDispatcher,
             CancellationToken ct
         )
         {
-            var command = new ReadProjectCommand();
+            var query = new GetProjectQuery();
 
-            var result = await commandDispatcher.DispatchAsync<ReadProjectCommand, List<ProjectDto>>(command, ct);
+            var result = await queryDispatcher.QueryAsync(query, ct);
         
             return TypedResults.Ok(result);
         }

@@ -21,7 +21,7 @@ namespace DotNetBoilerplate.Api.Projects
             CancellationToken ct
         )
         {
-            var command = new CreateProjectCommand(request.Name, request.Description, request.Status, request.OrganizationId);
+            var command = new CreateProjectCommand(request.Name, request.Description, request.Status, request.OrganizationId, request.CreatorId, request.CreatedAt);
 
             var result = await commandDispatcher
                 .DispatchAsync<CreateProjectCommand, Guid>(command, ct);
@@ -39,6 +39,8 @@ namespace DotNetBoilerplate.Api.Projects
             [Required] public string Description { get; init; }
             [Required] public string Status { get; init; }
             [Required] public Guid OrganizationId { get; init; }
+            [Required] public Guid CreatorId { get; init; }
+            [Required] public DateTimeOffset CreatedAt { get; init; }
         }
     }
 }

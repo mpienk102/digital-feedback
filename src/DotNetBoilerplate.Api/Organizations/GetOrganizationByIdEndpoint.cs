@@ -1,12 +1,13 @@
 ﻿using DotNetBoilerplate.Application.Organizations.Read;
 using DotNetBoilerplate.Shared.Abstractions.Commands;
+using DotNetBoilerplate.Shared.Abstractions.Queries;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DotNetBoilerplate.Api.Organizations
 {
-    public class ReadOrganizationByIdEndpoint : IEndpoint
+    public class GetOrganizationByIdEndpoint : IEndpoint
     {
         public static void Map(IEndpointRouteBuilder app)
         {
@@ -17,13 +18,13 @@ namespace DotNetBoilerplate.Api.Organizations
 
         private static async Task<Ok<OrganizationDto>> Handle(
             [FromRoute] Guid id,
-            [FromServices] ICommandDispatcher commandDispatcher,
+            [FromServices] IQueryDispatcher queryDispatcher,
             CancellationToken ct
         )
         {
-            var command = new ReadByIdCommand(id);
+            var query = new GetByIdQuery(id);
 
-            var result = await commandDispatcher.DispatchAsync<ReadByIdCommand, OrganizationDto>(command, ct);
+            var result = await queryDispatcher.QueryAsync(query, ct);
 
             return TypedResults.Ok(result);
         }

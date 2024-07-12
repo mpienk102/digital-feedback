@@ -1,5 +1,7 @@
 ﻿//using DotNetBoilerplate.Core.Projects.Exceptions;
 
+using System.Linq.Expressions;
+
 namespace DotNetBoilerplate.Core.Projects
 {
     public class Project
@@ -10,6 +12,8 @@ namespace DotNetBoilerplate.Core.Projects
         public string Description { get; private set; }
         public string Status {  get; private set; }
         public Guid OrganizationId { get; private set; }
+        public Guid CreatorId { get; private set; }
+        public DateTimeOffset CreatedAt { get; private set; }
 
         public void UpdateName(string name, bool nameIsUnique)
         {
@@ -19,17 +23,20 @@ namespace DotNetBoilerplate.Core.Projects
             }
 
             Name = name;
-        }
+        }   
 
         public static Project Create(
             string name,
             string description,
             string status,
             Guid organizationId,
+            Guid creatorId,
+            DateTimeOffset createdAt,
             bool nameIsUnique
         )
         {
-            if (!nameIsUnique) { } //
+            if (!nameIsUnique)
+                throw new Exception("Invalid name");
 
             return new Project
             {
@@ -37,7 +44,9 @@ namespace DotNetBoilerplate.Core.Projects
                 Name = name,
                 Description = description,
                 Status = status,
-                OrganizationId = organizationId
+                OrganizationId = organizationId,
+                CreatorId = creatorId,
+                CreatedAt = createdAt
             };
         }
     }

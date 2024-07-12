@@ -1,12 +1,14 @@
 ﻿using DotNetBoilerplate.Core.Projects;
 using DotNetBoilerplate.Shared.Abstractions.Commands;
 using DotNetBoilerplate.Shared.Abstractions.Contexts;
+using DotNetBoilerplate.Shared.Abstractions.Time;
 
 namespace DotNetBoilerplate.Application.Projects.Create
 {
     internal sealed class CreateProjectHandler (
         IProjectRepository projectRepository,
-        IContext context
+        IContext context,
+        IClock clock
     ) : ICommandHandler<CreateProjectCommand, Guid>
     {
         public async Task<Guid> HandleAsync(CreateProjectCommand command )
@@ -18,6 +20,8 @@ namespace DotNetBoilerplate.Application.Projects.Create
                 command.Description,
                 command.Status,
                 context.Identity.Id,
+                context.Identity.Id,
+                clock.Now(),
                 isNameUnique
             );
 

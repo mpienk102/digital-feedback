@@ -1,20 +1,19 @@
 ﻿using DotNetBoilerplate.Core.Organizations.Exceptions;
 using DotNetBoilerplate.Core.Organizations;
-using DotNetBoilerplate.Shared.Abstractions.Commands;
-using System.Threading.Tasks;
+using DotNetBoilerplate.Shared.Abstractions.Queries;
 
 namespace DotNetBoilerplate.Application.Organizations.Read
 {
-    internal sealed class ReadByIdHandler(
+    internal sealed class GetByIdHandler(
         IOrganizationsRepository organizationsRepository
-        ) : ICommandHandler<ReadByIdCommand, OrganizationDto>
+        ) : IQueryHandler<GetByIdQuery, OrganizationDto>
     {
-        public async Task<OrganizationDto> HandleAsync(ReadByIdCommand command)
+        public async Task<OrganizationDto> HandleAsync(GetByIdQuery query)
         {
-            var organization = await organizationsRepository.GetByIdAsync(command.Id);
+            var organization = await organizationsRepository.GetByIdAsync(query.Id);
             if (organization is null)
             {
-                throw new OrganizationIsNullException(command.Id);
+                throw new OrganizationIsNullException(query.Id);
             }
 
             return new OrganizationDto(

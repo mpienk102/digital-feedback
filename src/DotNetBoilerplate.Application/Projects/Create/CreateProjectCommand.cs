@@ -2,5 +2,5 @@
 
 namespace DotNetBoilerplate.Application.Projects.Create
 {
-    public sealed record CreateProjectCommand(string Name, string Description, string Status, Guid OrganizationId) : ICommand<Guid>;
+    public sealed record CreateProjectCommand(string Name, string Description, string Status, Guid OrganizationId, Guid CreatorId, DateTimeOffset CreatedAt) : ICommand<Guid>;
 }
