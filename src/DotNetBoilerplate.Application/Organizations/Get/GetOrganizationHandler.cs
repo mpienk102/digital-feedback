@@ -12,9 +12,9 @@ namespace DotNetBoilerplate.Application.Organizations.Read
         public async Task<List<OrganizationDto>> HandleAsync(GetOrganizationQuery query)
         {
             var organizations = await organizationsRepository.GetAllAsync();
-            return organizations.Select(o => new OrganizationDto(o.Id, o.Name, o.OwnerId, o.CreatedAt.UtcDateTime)).ToList();
+            return organizations.Select(o => new OrganizationDto(o.Id, o.Name, o.OwnerId, o.CreatedAt.UtcDateTime, o.Members)).ToList();
         }
     }
 
-    public record OrganizationDto(Guid Id, string Name, Guid CreatedBy, DateTime CreatedAt);
+    public record OrganizationDto(Guid Id, string Name, Guid CreatedBy, DateTime CreatedAt, List<Guid> Members);
 }
