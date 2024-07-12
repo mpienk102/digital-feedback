@@ -25,7 +25,7 @@ internal sealed class UpdateOrganizationEndpoint : IEndpoint
         CancellationToken ct
     )
     {
-        var command = new UpdateOrganizationCommand(id, request.Name);
+        var command = new UpdateOrganizationCommand(id, request.MemberId, request.Name);
 
         await commandDispatcher.DispatchAsync(command, ct);
 
@@ -39,6 +39,7 @@ internal sealed class UpdateOrganizationEndpoint : IEndpoint
     );
     private sealed class Request
     {
+        [Required] public Guid MemberId { get; init; }
         [Required] public string Name { get; init; }
     }
 }
