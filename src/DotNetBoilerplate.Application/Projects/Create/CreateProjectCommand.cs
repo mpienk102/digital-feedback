@@ -1,4 +1,6 @@
-﻿using DotNetBoilerplate.Shared.Abstractions.Commands;
+﻿using DotNetBoilerplate.Core.Projects;
+using DotNetBoilerplate.Shared.Abstractions.Commands;
+using static DotNetBoilerplate.Core.Projects.Project;
 
 namespace DotNetBoilerplate.Application.Projects.Create
 {
