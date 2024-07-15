@@ -13,7 +13,7 @@ internal sealed class UpdateProjectEndpoint : IEndpoint
     {
         app.MapPut("{id:guid}", Handle)
             .RequireAuthorization()
-            .WithSummary("Update project");
+            .WithSummary("Update project details");
     }
 
     private static async Task<IResult> Handle(
@@ -23,7 +23,7 @@ internal sealed class UpdateProjectEndpoint : IEndpoint
         CancellationToken ct
     )
     {
-        var command = new UpdateProjectCommand(id, request.Name);
+        var command = new UpdateProjectCommand(id, request.Name, request.Description);
 
         await commandDispatcher.DispatchAsync(command, ct);
 
@@ -36,5 +36,6 @@ internal sealed class UpdateProjectEndpoint : IEndpoint
     private sealed class Request
     {
         [Required] public string Name { get; init; }
+        [Required] public string Description { get; init; }
     }
 }

@@ -20,7 +20,7 @@ namespace DotNetBoilerplate.Core.Projects
             Archived
         } 
 
-        public void UpdateName(string name, bool nameIsUnique)
+        public void UpdateDetails(string name, string description, bool nameIsUnique)
         {
             if (!nameIsUnique)
             {
@@ -28,6 +28,7 @@ namespace DotNetBoilerplate.Core.Projects
             }
 
             Name = name;
+            Description = description;
         }
 
         public void UpdateStatus(ProjectStatus status)

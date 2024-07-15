@@ -2,6 +2,6 @@
 
 namespace DotNetBoilerplate.Application.Projects.Update
 {
-    public sealed record UpdateProjectCommand(Guid Id, string Name) : ICommand;
+    public sealed record UpdateProjectCommand(Guid Id, string Name, string Description) : ICommand;
 
 }
