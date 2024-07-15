@@ -1,7 +1,5 @@
 ﻿using DotNetBoilerplate.Application.Organizations.Read;
-using DotNetBoilerplate.Shared.Abstractions.Commands;
 using DotNetBoilerplate.Shared.Abstractions.Queries;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
