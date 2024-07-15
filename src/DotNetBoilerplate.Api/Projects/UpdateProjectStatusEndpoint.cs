@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using DotNetBoilerplate.Core.Projects;
 using static DotNetBoilerplate.Core.Projects.Project;
+using System.Text.Json.Serialization;
 
 namespace DotNetBoilerplate.Api.Projects
 {
@@ -35,7 +36,8 @@ namespace DotNetBoilerplate.Api.Projects
 
         private sealed class Request
         {
-            [Required] public ProjectStatus Status { get; }
+            [JsonConverter(typeof(JsonStringEnumConverter))]
+            public ProjectStatus Status { get; set; }
         }
     }
 }

@@ -32,7 +32,9 @@ namespace DotNetBoilerplate.Core.Projects
 
         public void UpdateStatus(ProjectStatus status)
         {
-            Status = status;
+            if (status == ProjectStatus.Public) { Status = ProjectStatus.Public; }
+            else if (status == ProjectStatus.Private) { Status = ProjectStatus.Private; }
+            else if (status == ProjectStatus.Archived) { Status = ProjectStatus.Archived; }
         }
 
         public static Project Create(
