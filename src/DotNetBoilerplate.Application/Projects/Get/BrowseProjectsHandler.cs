@@ -5,11 +5,11 @@ using System.Linq;
 
 namespace DotNetBoilerplate.Application.Projects.Read
 {
-    internal sealed class GetProjectHandler(
+    internal sealed class BrowseProjectsHandler(
         IProjectRepository projectRepository    
-    ) : IQueryHandler<GetProjectQuery, List<ProjectDto>>
+    ) : IQueryHandler<BrowseProjectsQuery, List<ProjectDto>>
     {
-        public async Task<List<ProjectDto>> HandleAsync(GetProjectQuery query)
+        public async Task<List<ProjectDto>> HandleAsync(BrowseProjectsQuery query)
         {
             var projects = await projectRepository.GetAllAsync();
 

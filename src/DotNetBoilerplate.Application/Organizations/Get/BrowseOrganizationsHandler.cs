@@ -5,11 +5,11 @@ using System.Linq;
 
 namespace DotNetBoilerplate.Application.Organizations.Read
 {
-    internal sealed class GetOrganizationHandler(
+    internal sealed class BrowseOrganizationsHandler(
         IOrganizationsRepository organizationsRepository
-        ) : IQueryHandler<GetOrganizationQuery, List<OrganizationDto>>
+        ) : IQueryHandler<BrowseOrganizationsQuery, List<OrganizationDto>>
     {
-        public async Task<List<OrganizationDto>> HandleAsync(GetOrganizationQuery query)
+        public async Task<List<OrganizationDto>> HandleAsync(BrowseOrganizationsQuery query)
         {
             var organizations = await organizationsRepository.GetAllAsync();
             return organizations.Select(o => new OrganizationDto(o.Id, o.Name, o.OwnerId, o.CreatedAt.UtcDateTime, o.Members)).ToList();
