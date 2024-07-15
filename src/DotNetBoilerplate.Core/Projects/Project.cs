@@ -1,4 +1,6 @@
-﻿namespace DotNetBoilerplate.Core.Projects
+﻿using DotNetBoilerplate.Core.Organizations.Exceptions;
+
+namespace DotNetBoilerplate.Core.Projects
 {
     public class Project
     {
@@ -6,29 +8,29 @@
         public Guid Id { get; private set; }
         public string Name { get; private set; }
         public string Description { get; private set; }
-        public string Status { get; private set; }
+        public ProjectStatus Status { get; private set; }
         public Guid OrganizationId { get; private set; }
         public Guid CreatorId { get; private set; }
         public DateTimeOffset CreatedAt { get; private set; }
 
-     /*   public enum ProjectStatus
+        public enum ProjectStatus
         {
             Public,
             Private,
             Archived
-        } */
+        } 
 
         public void UpdateName(string name, bool nameIsUnique)
         {
             if (!nameIsUnique)
             {
-                throw new Exception("Invalid name");
+                throw new ProjectNameIsNotUniqueException();
             }
 
             Name = name;
         }
 
-        public void UpdateStatus(string status)
+        public void UpdateStatus(ProjectStatus status)
         {
             Status = status;
         }
@@ -36,7 +38,6 @@
         public static Project Create(
             string name,
             string description,
-            string status,
             Guid organizationId,
             Guid creatorId,
             DateTimeOffset createdAt,
@@ -44,14 +45,14 @@
         )
         {
             if (!nameIsUnique)
-                throw new Exception("Invalid name");
+                throw new ProjectNameIsNotUniqueException();
 
             return new Project
             {
                 Id = Guid.NewGuid(),
                 Name = name,
                 Description = description,
-                Status = status,
+                Status = ProjectStatus.Private,
                 OrganizationId = organizationId,
                 CreatorId = creatorId,
                 CreatedAt = createdAt

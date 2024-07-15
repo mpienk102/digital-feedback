@@ -35,7 +35,7 @@ namespace DotNetBoilerplate.Api.Projects
 
         private sealed class Request
         {
-            [Required] public string Status { get; init; }
+            [Required] public ProjectStatus Status { get; }
         }
     }
 }

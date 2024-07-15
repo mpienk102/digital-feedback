@@ -16,5 +16,5 @@ namespace DotNetBoilerplate.Application.Projects.Read
         }
     }
 
-    public record ProjectDto(Guid Id, string Name, string Description, string Status, Guid organizationId);
+    public record ProjectDto(Guid Id, string Name, string Description, Project.ProjectStatus Status, Guid organizationId);
 }
