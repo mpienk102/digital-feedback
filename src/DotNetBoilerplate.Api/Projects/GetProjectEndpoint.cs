@@ -22,13 +22,16 @@ namespace DotNetBoilerplate.Api.Projects
             CancellationToken ct
         )
         {
-            var query = new GetProjectQuery();
+            var query = new GetProjectQuery
+            {
+                Status = queryParams.Status // przekazanie statusu do zapytania
+            };
 
             var result = await queryDispatcher.QueryAsync(query, ct);
         
             return TypedResults.Ok(result);
         }
-        private sealed class QueryParams
+        public sealed class QueryParams
         {
             [FromQuery] public Project.ProjectStatus Status { get; init; }
         }
