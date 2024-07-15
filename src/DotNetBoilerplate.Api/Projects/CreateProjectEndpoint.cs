@@ -3,6 +3,7 @@ using DotNetBoilerplate.Application.Projects.Create;
 using DotNetBoilerplate.Shared.Abstractions.Commands;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using static DotNetBoilerplate.Core.Projects.Project;
 
 namespace DotNetBoilerplate.Api.Projects
 {
