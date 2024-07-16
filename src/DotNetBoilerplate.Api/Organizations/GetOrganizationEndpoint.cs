@@ -21,7 +21,7 @@ namespace DotNetBoilerplate.Api.Organizations
             CancellationToken ct
         )
         {
-            var query = new GetOrganizationQuery();
+            var query = new BrowseOrganizationsQuery();
 
             var result = await queryDispatcher.QueryAsync(query, ct);
 

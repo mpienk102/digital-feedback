@@ -18,7 +18,6 @@ namespace DotNetBoilerplate.Application.Projects.Create
             var project = Project.Create(
                 command.Name,
                 command.Description,
-                command.Status,
                 context.Identity.Id,
                 context.Identity.Id,
                 clock.Now(),
