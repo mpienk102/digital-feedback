@@ -1,5 +1,4 @@
 using System.Text.Json.Serialization;
-using DotNetBoilerplate.Api.Employees;
 using DotNetBoilerplate.Api.Organizations;
 using DotNetBoilerplate.Api.Projects;
 using DotNetBoilerplate.Api.Users;
@@ -43,8 +42,6 @@ app.MapUsersEndpoints();
 app.MapOrganizationsEndpoints();
 
 app.MapProjectsEndpoints();
-
-app.MapEmployeesEndpoints();
 
 app.UseInfrastructure();
 
