@@ -8,6 +8,8 @@
         public static void MapEmployeesEndpoints(this WebApplication app)
         {
             var group = app.MapGroup(BasePath).WithTags(Tags);
+            //group
+                //.MapEndpoint<CreateEmployeeEndpoint>();
         }
     }
 }

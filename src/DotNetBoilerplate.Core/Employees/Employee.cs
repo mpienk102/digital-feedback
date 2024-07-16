@@ -1,15 +1,16 @@
 ﻿using System;
+using static DotNetBoilerplate.Core.Employees.Role;
 
 namespace DotNetBoilerplate.Core.Employees
 {
     public class Employee
     {
-        private Employee(Guid id, Guid organizationId)
+        private Employee(Guid id, Guid organizationId, RoleInOrganization role)
         {
             Id = id;
             UserId = id;
             OrganizationId = organizationId;
-            Role = RoleInOrganization.None;
+            Role = role;
         }
 
         public Employee()
@@ -25,12 +26,6 @@ namespace DotNetBoilerplate.Core.Employees
         public Guid OrganizationId { get; private set; }
         public RoleInOrganization Role { get; private set; }
 
-        public enum RoleInOrganization
-        {
-            None, // Defaultowy użytkownik bez uprawnień
-            Moderator, // Uprawnienia do może dodawawania pracowników do projektu, może dodawać i edytować projekty
-            Admin // Zarządza organizacją, projektami i ich członkami
-        }
 
         public void UpdateRole(RoleInOrganization roleInOrganization)
         {
@@ -42,15 +37,15 @@ namespace DotNetBoilerplate.Core.Employees
             if (organizationId != Guid.Empty)
                 throw new Exception("User already belongs to organization");
 
-            return new Employee(userId, organizationId)
+            return new Employee(userId, organizationId, role)
             {
                 Role = role
             };
         }
 
-        public static Employee New(Guid id, Guid organizationId)
+        public static Employee New(Guid id, Guid organizationId, RoleInOrganization role)
         {
-            return new Employee(id, organizationId);
+            return new Employee(id, organizationId, role);
         }
     }
 }

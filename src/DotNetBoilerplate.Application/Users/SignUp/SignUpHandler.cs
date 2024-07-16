@@ -4,6 +4,7 @@ using DotNetBoilerplate.Core.Employees;
 using DotNetBoilerplate.Core.Users;
 using DotNetBoilerplate.Shared.Abstractions.Commands;
 using DotNetBoilerplate.Shared.Abstractions.Time;
+using static DotNetBoilerplate.Core.Employees.Role;
 
 namespace DotNetBoilerplate.Application.Users.SignUp;
 
@@ -32,7 +33,7 @@ internal sealed class SignUpHandler : ICommandHandler<SignUpCommand>
         if (await _userReadService.ExistsByEmailAsync(email)) throw new EmailExistsException();
         if (await _userReadService.ExistsByUsernameAsync(username)) throw new UsernameExistsException();
        
-        var employee = Employee.New((Guid)command.UserId, Guid.Empty);
+        var employee = Employee.New((Guid)command.UserId, Guid.Empty, RoleInOrganization.None);
         var user = User.New(command.UserId, email, username, password, _clock.Now());
         await _userRepository.AddAsync(user);
     }
