@@ -13,7 +13,7 @@ namespace DotNetBoilerplate.Application.Projects.Read
         {
             var projects = await projectRepository.GetAllAsync();
 
-            if (query.Status != null)
+            if (query.Status is not null)
             {
                 projects = projects.Where(p => p.Status == query.Status).ToList();
             }

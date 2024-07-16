@@ -34,9 +34,7 @@ namespace DotNetBoilerplate.Core.Employees
 
         public void UpdateRole(RoleInOrganization roleInOrganization)
         {
-            if (roleInOrganization == RoleInOrganization.None) { Role = RoleInOrganization.None; }
-            else if (roleInOrganization == RoleInOrganization.Moderator) { Role = RoleInOrganization.Moderator; }
-            else if (roleInOrganization == RoleInOrganization.Admin) { Role = RoleInOrganization.Admin; }
+            Role = roleInOrganization;
         }
 
         public static Employee Create(Guid userId, Guid organizationId, RoleInOrganization role)
