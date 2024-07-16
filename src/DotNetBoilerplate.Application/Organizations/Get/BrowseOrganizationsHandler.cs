@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace DotNetBoilerplate.Application.Organizations.Read
 {
-    internal sealed class BrowserOrganizationsHandler(
+    internal sealed class BrowseOrganizationsHandler(
         IOrganizationsRepository organizationsRepository
         ) : IQueryHandler<BrowseOrganizationsQuery, List<OrganizationDto>>
     {
