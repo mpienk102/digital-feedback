@@ -4,5 +4,5 @@ using System.Windows.Input;
 
 namespace DotNetBoilerplate.Application.Organizations.Read
 {
-    public sealed class GetOrganizationQuery : IQuery<List<OrganizationDto>>;
+    public sealed class BrowseOrganizationsQuery : IQuery<List<OrganizationDto>>;
 }

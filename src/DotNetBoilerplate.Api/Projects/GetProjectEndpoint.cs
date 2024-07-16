@@ -22,7 +22,7 @@ namespace DotNetBoilerplate.Api.Projects
             CancellationToken ct
         )
         {
-            var query = new GetProjectQuery
+            var query = new BrowseProjectsQuery
             {
                 Status = queryParams.Status // przekazanie statusu do zapytania
             };
