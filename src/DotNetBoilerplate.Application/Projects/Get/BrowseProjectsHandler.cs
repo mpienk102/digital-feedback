@@ -14,10 +14,8 @@ namespace DotNetBoilerplate.Application.Projects.Read
             var projects = await projectRepository.GetAllAsync();
 
             if (query.Status is not null)
-            {
                 projects = projects.Where(p => p.Status == query.Status).ToList();
-            }
-
+         
             return projects.Select(p => new ProjectDto(p.Id, p.Name, p.Description, p.Status, p.OrganizationId)).ToList();
         }
     }

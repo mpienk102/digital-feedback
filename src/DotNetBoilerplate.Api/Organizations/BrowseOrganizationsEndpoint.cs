@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DotNetBoilerplate.Api.Organizations
 {
-    public class GetOrganizationEndpoint : IEndpoint
+    public class BrowseOrganizationsEndpoint : IEndpoint
     {
         public static void Map(IEndpointRouteBuilder app)
         {

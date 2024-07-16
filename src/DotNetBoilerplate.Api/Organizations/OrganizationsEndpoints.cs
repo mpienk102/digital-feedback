@@ -12,7 +12,7 @@
             group
                 .MapEndpoint<CreateOrganizationEndpoint>()
                 .MapEndpoint<UpdateOrganizationEndpoint>()
-                .MapEndpoint<GetOrganizationEndpoint>()
+                .MapEndpoint<BrowseOrganizationsEndpoint>()
                 .MapEndpoint<GetOrganizationByIdEndpoint>();
         }
     }

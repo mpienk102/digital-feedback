@@ -1,4 +1,5 @@
 ﻿using DotNetBoilerplate.Application.Projects.Read;
+using DotNetBoilerplate.Core.Employees;
 using DotNetBoilerplate.Core.Organizations;
 using DotNetBoilerplate.Core.Projects;
 using DotNetBoilerplate.Core.Users;
@@ -16,6 +17,8 @@ internal static class Extensions
         services.AddSingleton<IOrganizationsRepository, InMemoryOrganizationsRepository>();
 
         services.AddSingleton<IProjectRepository, InMemoryProjectsRepository>();
+
+        services.AddSingleton<IEmployeeRepository, InMemoryEmployeeRepository>();
 
         return services;
     }

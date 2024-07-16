@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DotNetBoilerplate.Api.Projects
 {
-    public class GetProjectEndpoint : IEndpoint
+    public class BrowseProjectsEndpoint : IEndpoint
     {
         public static void Map(IEndpointRouteBuilder app)
         {
