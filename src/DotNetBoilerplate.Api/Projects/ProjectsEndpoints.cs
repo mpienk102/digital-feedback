@@ -11,7 +11,7 @@
 
             group
                 .MapEndpoint<CreateProjectEndpoint>()
-                .MapEndpoint<GetProjectEndpoint>()
+                .MapEndpoint<BrowseProjectsEndpoint>()
                 .MapEndpoint<GetProjectByIdEndpoint>()
                 .MapEndpoint<UpdateProjectEndpoint>()
                 .MapEndpoint<UpdateProjectStatusEndpoint>()
