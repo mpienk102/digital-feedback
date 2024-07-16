@@ -15,7 +15,7 @@ internal sealed class UpdateProjectHandler(
 
         var isNameUnique = await projectRepository.IsProjectNameUniqueAsync(command.Name, project.Id);
 
-        project.UpdateName(command.Name, isNameUnique);
+        project.UpdateDetails(command.Name, command.Description, isNameUnique);
 
         await projectRepository.UpdateAsync(project);
     }

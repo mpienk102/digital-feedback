@@ -14,7 +14,8 @@
                 .MapEndpoint<GetProjectEndpoint>()
                 .MapEndpoint<GetProjectByIdEndpoint>()
                 .MapEndpoint<UpdateProjectEndpoint>()
-                .MapEndpoint<UpdateProjectStatusEndpoint>();
+                .MapEndpoint<UpdateProjectStatusEndpoint>()
+                .MapEndpoint<DeleteProjectEndpoint>();
         }   
     }
 }

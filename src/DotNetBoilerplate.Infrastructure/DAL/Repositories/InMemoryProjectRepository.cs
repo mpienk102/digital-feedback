@@ -29,9 +29,10 @@ internal sealed class InMemoryProjectsRepository : IProjectRepository
         return Task.CompletedTask;
     }
 
-    public Task DeleteAsync(Project project)
+    public async Task DeleteAsync(Project project)
     {
-        throw new NotImplementedException();
+        projects.Remove(project);
+        await Task.CompletedTask;
     }
 
     public Task<bool> IsProjectNameUniqueAsync(string name, Guid? currentprojectId)
