@@ -11,7 +11,9 @@
 
             group
                 .MapEndpoint<CreateEmployeeEndpoint>()
-                .MapEndpoint<BrowseEmployeesEndpoint>();
+                .MapEndpoint<BrowseEmployeesEndpoint>()
+                .MapEndpoint<UpdateRoleEmployeeEndpoint>()
+                .MapEndpoint<GetEmployeeByIdEndpoint>();
         }
     }
 }
