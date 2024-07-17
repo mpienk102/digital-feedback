@@ -13,6 +13,28 @@
             Role = role;
         }
 
+<<<<<<< Updated upstream
+=======
+        public  bool isAdmin(Guid Id)
+        {
+            return this.UserId == Id && this.Role == RoleInOrganization.Role.Admin;
+        }
+
+        public void SetRoleAdmin(Guid userId, Guid organizationId)
+        {
+            if (this.UserId == userId && this.Role == RoleInOrganization.Role.None)
+            {
+                this.Role = RoleInOrganization.Role.Admin;
+                this.OrganizationId = organizationId;
+            }
+            else if (this.UserId == userId && this.Role != RoleInOrganization.Role.None && this.OrganizationId != organizationId)
+            {
+                throw new Exception("User already has a role in another organization");
+            }
+        }
+
+
+>>>>>>> Stashed changes
         public static Employee Create (
             Guid userId,
             Guid organizationId,
