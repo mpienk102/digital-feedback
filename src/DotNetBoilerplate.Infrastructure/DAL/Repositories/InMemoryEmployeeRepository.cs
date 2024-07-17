@@ -6,6 +6,13 @@ namespace DotNetBoilerplate.Infrastructure.DAL.Repositories
     {
         private readonly List<Employee> employees = [];
 
+        public Task<Employee> GetByUserIdAsync(Guid Id)
+        {
+            var employee = employees.Find(x => x.UserId == Id);
+
+            return Task.FromResult(employee);
+        }
+
         public Task<Employee> GetByIdAsync(Guid id) { 
             var employee = employees.Find(x => x.EmployeeId == id);
 
