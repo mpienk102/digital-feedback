@@ -4,6 +4,7 @@ using DotNetBoilerplate.Core.Users;
 using DotNetBoilerplate.Shared.Abstractions.Commands;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace DotNetBoilerplate.Api.Organizations
 {
@@ -33,7 +34,7 @@ namespace DotNetBoilerplate.Api.Organizations
 
             [Required] public Guid OrganizationId { get; init; }
 
-            [Required] public RoleInOrganization.Role Role { get; init; }
+            [JsonConverter(typeof(JsonStringEnumConverter))] public RoleInOrganization.Role Role { get; init; }
         }
     }
 }

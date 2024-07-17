@@ -13,8 +13,6 @@
             Role = role;
         }
 
-<<<<<<< Updated upstream
-=======
         public  bool isAdmin(Guid Id)
         {
             return this.UserId == Id && this.Role == RoleInOrganization.Role.Admin;
@@ -33,8 +31,6 @@
             }
         }
 
-
->>>>>>> Stashed changes
         public static Employee Create (
             Guid userId,
             Guid organizationId,
