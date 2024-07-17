@@ -1,4 +1,5 @@
-﻿using DotNetBoilerplate.Core.Users;
+﻿using DotNetBoilerplate.Core.Projects;
+using DotNetBoilerplate.Core.Users;
 using DotNetBoilerplate.Infrastructure.DAL.Contexts;
 using Microsoft.EntityFrameworkCore;
 
@@ -40,5 +41,10 @@ internal sealed class PostgresUserRepository : IUserRepository
     {
         return _users
             .SingleOrDefaultAsync(x => x.Username == username);
+    }
+
+    public async Task<List<User>> GetAllAsync()
+    {
+        return await _users.ToListAsync();
     }
 }
