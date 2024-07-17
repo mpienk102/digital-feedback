@@ -1,5 +1,5 @@
 ﻿
-using DotNetBoilerplate.Application.Employees.Exceptions;
+
 using DotNetBoilerplate.Application.Employees.Get;
 using DotNetBoilerplate.Core.Employees;
 using DotNetBoilerplate.Shared.Abstractions.Queries;
