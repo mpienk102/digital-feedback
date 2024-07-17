@@ -15,7 +15,7 @@
 
         public bool isAdmin(Guid Id)
         {
-            return this.EmployeeId == Id && this.Role == RoleInOrganization.Role.Admin;
+            return this.UserId == Id && this.Role == RoleInOrganization.Role.Admin;
         }
 
         public void SetRoleAdmin(Guid userId, Guid organizationId)
