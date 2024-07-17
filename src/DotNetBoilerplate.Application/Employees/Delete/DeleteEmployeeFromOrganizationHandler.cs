@@ -5,7 +5,8 @@ using DotNetBoilerplate.Shared.Abstractions.Contexts;
 namespace DotNetBoilerplate.Application.Employees.Delete
 {
     internal class DeleteEmployeeFromOrganizationHandler(
-        IEmployeeRepository employeeRepository
+        IEmployeeRepository employeeRepository,
+        IContext context
         ) : ICommandHandler<DeleteEmployeeFromOrganizationCommand>
     {
         public async Task HandleAsync(DeleteEmployeeFromOrganizationCommand command)
@@ -15,7 +16,14 @@ namespace DotNetBoilerplate.Application.Employees.Delete
             if (employee is null) {
                 throw new Exception("user does not exist");
             }
-            // -----------> wywołanie IsAdmin()
+            var currentUser = context.Identity.Id;
+
+            var admin = await employeeRepository.GetByIdAsync(currentUser);
+
+            if (admin == null || admin.Role != RoleInOrganization.Role.Admin)
+            {
+                throw new UnauthorizedAccessException("Only admins can update roles.");
+            }
 
             employee.UpdateRole(RoleInOrganization.Role.None);
             employee.SetOrganizationIdToNone();
