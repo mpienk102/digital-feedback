@@ -18,21 +18,19 @@
             return this.EmployeeId == Id && this.Role == RoleInOrganization.Role.Admin;
         }
 
-        public void SetRoleAdmin (Guid userId, Guid organizationId)
+        public void SetRoleAdmin(Guid userId, Guid organizationId)
         {
-            try
+            if (this.UserId == userId && this.Role == RoleInOrganization.Role.None)
             {
-                if (this.UserId == userId && this.Role == RoleInOrganization.Role.None)
-                {
-                    this.Role = RoleInOrganization.Role.Admin;
-                    this.OrganizationId = organizationId;
-                }
+                this.Role = RoleInOrganization.Role.Admin;
+                this.OrganizationId = organizationId;
             }
-            catch (Exception ex) {
-                throw new Exception("User has role in other organization");
+            else if (this.UserId == userId && this.Role != RoleInOrganization.Role.None && this.OrganizationId != organizationId)
+            {
+                throw new Exception("User already has a role in another organization");
             }
-                
         }
+
 
         public static Employee Create (
             Guid userId,
