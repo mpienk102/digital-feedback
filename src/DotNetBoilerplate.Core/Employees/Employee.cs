@@ -13,6 +13,10 @@
             Role = role;
         }
 
+        public void SetOrganizationIdToNone()
+        {
+            OrganizationId = Guid.Empty;
+        }
         public static Employee Create (
             Guid userId,
             Guid organizationId,
