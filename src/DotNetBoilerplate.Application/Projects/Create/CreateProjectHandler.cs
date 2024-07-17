@@ -18,7 +18,7 @@ namespace DotNetBoilerplate.Application.Projects.Create
             var project = Project.Create(
                 command.Name,
                 command.Description,
-                context.Identity.Id,
+                command.OrganizationId,
                 context.Identity.Id,
                 clock.Now(),
                 isNameUnique
