@@ -25,8 +25,8 @@ internal sealed class CreateOrganizationHandler(
         );
 
         var employee = await employeeRepository.GetByUserIdAsync(context.Identity.Id);
-        if (employee.OrganizationId == Guid.Empty)
-            throw new Exception("Employee not exist in organization");
+        if (employee.OrganizationId != Guid.Empty)
+            throw new Exception("Employee belongs the other organization");
 
         organization.Members.Add(context.Identity.Id);
 

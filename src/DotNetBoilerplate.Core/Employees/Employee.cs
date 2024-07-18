@@ -22,7 +22,7 @@
         {
             this.OrganizationId = OrganizationId;
         }
-
+        
         public void SetRoleAdmin(Guid userId, Guid organizationId)
         {
             if (this.UserId == userId && this.Role == RoleInOrganization.Role.None)
