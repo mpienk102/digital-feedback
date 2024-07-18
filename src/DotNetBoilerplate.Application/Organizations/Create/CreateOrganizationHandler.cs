@@ -3,7 +3,7 @@ using DotNetBoilerplate.Core.Organizations;
 using DotNetBoilerplate.Shared.Abstractions.Commands;
 using DotNetBoilerplate.Shared.Abstractions.Contexts;
 using DotNetBoilerplate.Shared.Abstractions.Time;
-
+using DotNetBoilerplate.Application.Organizations.Exceptions;
 namespace DotNetBoilerplate.Application.Organizations.Create;
 
 internal sealed class CreateOrganizationHandler(
@@ -26,7 +26,7 @@ internal sealed class CreateOrganizationHandler(
 
         var employee = await employeeRepository.GetByUserIdAsync(context.Identity.Id);
         if (employee.OrganizationId != Guid.Empty)
-            throw new Exception("Employee belongs the other organization");
+            throw new EmployeeBelongToOtherOrganizationException();
 
         organization.Members.Add(context.Identity.Id);
 

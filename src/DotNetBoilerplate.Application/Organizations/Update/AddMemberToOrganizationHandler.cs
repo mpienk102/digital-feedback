@@ -1,4 +1,5 @@
-﻿using DotNetBoilerplate.Core.Employees;
+﻿using DotNetBoilerplate.Application.Organizations.Exceptions;
+using DotNetBoilerplate.Core.Employees;
 using DotNetBoilerplate.Core.Organizations;
 using DotNetBoilerplate.Shared.Abstractions.Commands;
 using DotNetBoilerplate.Shared.Abstractions.Contexts;
@@ -19,22 +20,26 @@ namespace DotNetBoilerplate.Application.Organizations.Update
     {
         public async Task<Guid> HandleAsync(AddMemberToOrganizationCommand command )
         {
-            var Admin = await employeeRepository.GetByUserIdAsync(context.Identity.Id);
+            var Admin = await employeeRepository.GetByIdAsync(context.Identity.Id);
 
-            if (!Admin.isAdmin(context.Identity.Id))
-                throw new Exception("You are not an Admin!");
+            if (Admin.isAdmin(context.Identity.Id))
+                throw new MissingAdminRoleException(command.OrganizationId);
 
             var organization = await organizationRepository.GetByIdAsync(command.OrganizationId);
 
-            var employee = await employeeRepository.GetByUserIdAsync(command.EmployeeId);
+            var employee = await employeeRepository.GetByIdAsync(command.EmployeeId);
 
 
 
-            if (employee is null || organization is null) 
-                throw new Exception("Given organization or employee does not exist");
+            // if (employee is null || organization is null) 
+            //    throw new Exception("Given organization or employee does not exist");
+            if (organization is null)
+                throw new OrganizationNotFoundException(command.OrganizationId);
+            if (employee is null)
+                throw new EmployeeNotFoundException(command.EmployeeId);
 
             organization.AddMember(employee.UserId);
-            employee.SetOrganizationId(command.OrganizationId);
+
             employee.UpdateRole(command.Role);
 
             await organizationRepository.UpdateAsync(organization);

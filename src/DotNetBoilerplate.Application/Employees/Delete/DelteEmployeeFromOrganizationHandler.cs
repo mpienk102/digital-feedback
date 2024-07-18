@@ -1,4 +1,4 @@
-﻿using DotNetBoilerplate.Application.Exceptions;
+﻿using DotNetBoilerplate.Application.Employees.Exceptions;
 using DotNetBoilerplate.Core.Employees;
 using DotNetBoilerplate.Core.Organizations;
 using DotNetBoilerplate.Shared.Abstractions.Commands;
@@ -16,10 +16,7 @@ namespace DotNetBoilerplate.Application.Employees.Delete
             var employee = await employeeRepository.GetByIdAsync(command.UserId);
 
             if (employee is null)
-            {
                 throw new EmployeeNotFoundException(command.UserId);
-            }
-
 
             employee.UpdateRole(RoleInOrganization.Role.None);
             employee.SetOrganizationId(Guid.Empty);
