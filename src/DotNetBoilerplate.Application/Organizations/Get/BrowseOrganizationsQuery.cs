@@ -1,8 +1,5 @@
-﻿using DotNetBoilerplate.Shared.Abstractions.Commands;
-using DotNetBoilerplate.Shared.Abstractions.Queries;
-using System.Windows.Input;
+﻿using DotNetBoilerplate.Shared.Abstractions.Queries;
 
-namespace DotNetBoilerplate.Application.Organizations.Read
-{
-    public sealed class BrowseOrganizationsQuery : IQuery<List<OrganizationDto>>;
-}
+namespace DotNetBoilerplate.Application.Organizations.Get;
+
+public sealed class BrowseOrganizationsQuery : IQuery<List<OrganizationDto>>;
