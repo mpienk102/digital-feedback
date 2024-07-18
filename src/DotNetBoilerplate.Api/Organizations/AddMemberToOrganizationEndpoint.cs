@@ -12,19 +12,20 @@ namespace DotNetBoilerplate.Api.Organizations
     {
         public static void Map(IEndpointRouteBuilder app)
         {
-            app.MapPut("", Handle)
+            app.MapPost("{OrganizationId:guid}/members", Handle)
                 .RequireAuthorization()
                 .WithSummary("Add member to organization");
         }
         private static async Task<IResult> Handle(
             [FromServices] ICommandDispatcher commandDispatcher,
+            [FromRoute] Guid OrganizationId,
             [FromBody] Request request,
             CancellationToken ct
         )
         {
-            var command = new AddMemberToOrganizationCommand(request.UserId, request.OrganizationId, request.Role);
+            var command = new AddMemberToOrganizationCommand(request.UserId, OrganizationId, request.Role);
 
-            await commandDispatcher.DispatchAsync(command);
+            await commandDispatcher.DispatchAsync<AddMemberToOrganizationCommand, Guid>(command);
 
             return TypedResults.Ok();
         }
@@ -32,7 +33,6 @@ namespace DotNetBoilerplate.Api.Organizations
         {
             [Required] public Guid UserId { get; init; }
 
-            [Required] public Guid OrganizationId { get; init; }
 
             [JsonConverter(typeof(JsonStringEnumConverter))] public RoleInOrganization.Role Role { get; init; }
         }

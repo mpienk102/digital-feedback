@@ -24,11 +24,14 @@ internal sealed class CreateOrganizationHandler(
             isNameUnique
         );
 
+        var employee = await employeeRepository.GetByUserIdAsync(context.Identity.Id);
+        if (employee.OrganizationId == Guid.Empty)
+            throw new Exception("Employee not exist in organization");
+
         organization.Members.Add(context.Identity.Id);
 
         await organizationsRepository.AddAsync(organization);
 
-        var employee = await employeeRepository.GetByUserIdAsync(context.Identity.Id);
 
         employee.SetRoleAdmin(context.Identity.Id, organization.Id);
 

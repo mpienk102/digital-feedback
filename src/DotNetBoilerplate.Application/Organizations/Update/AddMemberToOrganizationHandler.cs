@@ -19,14 +19,14 @@ namespace DotNetBoilerplate.Application.Organizations.Update
     {
         public async Task<Guid> HandleAsync(AddMemberToOrganizationCommand command )
         {
-            var Admin = await employeeRepository.GetByIdAsync(context.Identity.Id);
+            var Admin = await employeeRepository.GetByUserIdAsync(context.Identity.Id);
 
-            if (Admin.isAdmin(context.Identity.Id))
+            if (!Admin.isAdmin(context.Identity.Id))
                 throw new Exception("You are not an Admin!");
 
             var organization = await organizationRepository.GetByIdAsync(command.OrganizationId);
 
-            var employee = await employeeRepository.GetByIdAsync(command.EmployeeId);
+            var employee = await employeeRepository.GetByUserIdAsync(command.EmployeeId);
 
 
 
@@ -34,7 +34,7 @@ namespace DotNetBoilerplate.Application.Organizations.Update
                 throw new Exception("Given organization or employee does not exist");
 
             organization.AddMember(employee.UserId);
-
+            employee.SetOrganizationId(command.OrganizationId);
             employee.UpdateRole(command.Role);
 
             await organizationRepository.UpdateAsync(organization);

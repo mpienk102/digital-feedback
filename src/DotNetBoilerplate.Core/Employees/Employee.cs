@@ -18,6 +18,11 @@
             return this.UserId == Id && this.Role == RoleInOrganization.Role.Admin;
         }
 
+        public void SetOrganizationId(Guid OrganizationId)
+        {
+            this.OrganizationId = OrganizationId;
+        }
+
         public void SetRoleAdmin(Guid userId, Guid organizationId)
         {
             if (this.UserId == userId && this.Role == RoleInOrganization.Role.None)
