@@ -1,4 +1,5 @@
-﻿using DotNetBoilerplate.Core.Employees;
+﻿using DotNetBoilerplate.Application.Exceptions;
+using DotNetBoilerplate.Core.Employees;
 using DotNetBoilerplate.Core.Organizations;
 using DotNetBoilerplate.Shared.Abstractions.Commands;
 using DotNetBoilerplate.Shared.Abstractions.Contexts;
@@ -16,9 +17,9 @@ namespace DotNetBoilerplate.Application.Employees.Delete
 
             if (employee is null)
             {
-                throw new Exception("user does not exist");
+                throw new EmployeeNotFoundException(command.UserId);
             }
-            // -----------> wywołanie IsAdmin()
+
 
             employee.UpdateRole(RoleInOrganization.Role.None);
             employee.SetOrganizationId(Guid.Empty);
