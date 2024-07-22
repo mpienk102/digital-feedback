@@ -35,6 +35,7 @@ namespace DotNetBoilerplate.Core.Employees
             else UserInOrganization(userId, organizationId);
         }
 
+
         public static Employee Create (
             Guid userId,
             Guid organizationId,

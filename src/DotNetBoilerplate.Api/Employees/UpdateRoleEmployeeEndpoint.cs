@@ -12,7 +12,7 @@ namespace DotNetBoilerplate.Api.Employees
     {
         public static void Map(IEndpointRouteBuilder app)
         {
-            app.MapPut("employees/{id:guid}/role", Handle)
+            app.MapPut("/{id:guid}/role", Handle)
                 .RequireAuthorization()
                 .WithSummary("Update employee role");
         }

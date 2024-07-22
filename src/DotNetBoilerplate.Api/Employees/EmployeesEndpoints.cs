@@ -14,7 +14,10 @@
                 .MapEndpoint<BrowseEmployeesEndpoint>()
                 .MapEndpoint<GetEmployeeByIdEndpoint>()
                 .MapEndpoint<UpdateRoleEmployeeEndpoint>()
-                .MapEndpoint<DeleteEmployeeFromOrganizationEndpoint>();
+                .MapEndpoint<DeleteEmployeeFromOrganizationEndpoint>()
+                .MapEndpoint<UpdateRoleEmployeeEndpoint>()
+                .MapEndpoint<GetEmployeeByIdEndpoint>();
+
         }
     }
 }

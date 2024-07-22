@@ -13,7 +13,7 @@ namespace DotNetBoilerplate.Application.Employees.Create
         {
             var employee = Employee.Create(
                 context.Identity.Id,
-                context.Identity.Id,
+                command.OrganizationId,
                 command.Role
             );
 

@@ -1,27 +1,25 @@
-﻿using DotNetBoilerplate.Application.Employees.Get;
+﻿using DotNetBoilerplate.Application.Users.Read;
 using DotNetBoilerplate.Shared.Abstractions.Queries;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
-namespace DotNetBoilerplate.Api.Employees
+namespace DotNetBoilerplate.Api.Users
 {
-    public class GetEmployeeByIdEndpoint : IEndpoint
+    public class BrowseUsersEndpoint : IEndpoint
     {
         public static void Map(IEndpointRouteBuilder app)
         {
-            app.MapGet("{id:guid}", Handle)
+            app.MapGet("users", Handle)
                 .RequireAuthorization()
-                .WithSummary("Get employee by id");
+                .WithSummary("Get all users");
         }
 
-        private static async Task<Ok<EmployeeDto>> Handle(
-            [FromRoute] Guid id,
+        private static async Task<Ok<List<UserDto>>> Handle(
             [FromServices] IQueryDispatcher queryDispatcher,
             CancellationToken ct
         )
         {
-            var query = new GetEmployeeByIdQuery(id);
-
+            var query = new BrowseUsersQuery();
             var result = await queryDispatcher.QueryAsync(query, ct);
 
             return TypedResults.Ok(result);
