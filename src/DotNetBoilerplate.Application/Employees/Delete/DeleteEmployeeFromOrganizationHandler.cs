@@ -24,7 +24,7 @@ namespace DotNetBoilerplate.Application.Employees.Delete
             var organization = await organizationRepository.GetByIdAsync(organizationId);
             organization.Members.Remove(command.UserId);
             await employeeRepository.UpdateAsync(employee);
-
+            await organizationRepository.UpdateAsync(organization);
         }
     }
 }

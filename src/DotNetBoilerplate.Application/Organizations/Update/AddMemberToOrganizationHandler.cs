@@ -20,9 +20,9 @@ namespace DotNetBoilerplate.Application.Organizations.Update
     {
         public async Task<Guid> HandleAsync(AddMemberToOrganizationCommand command )
         {
-            var Admin = await employeeRepository.GetByIdAsync(context.Identity.Id);
+            var admin = await employeeRepository.GetByIdAsync(context.Identity.Id);
 
-            if (Admin.isAdmin(context.Identity.Id))
+            if (admin.IsAdmin(context.Identity.Id))
                 throw new MissingAdminRoleException(command.OrganizationId);
 
             var organization = await organizationRepository.GetByIdAsync(command.OrganizationId);

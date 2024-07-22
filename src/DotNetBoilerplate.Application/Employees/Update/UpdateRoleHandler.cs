@@ -19,7 +19,9 @@ namespace DotNetBoilerplate.Application.Employees.Update
             if(employee.OrganizationId != command.OrganizationId)
                 throw new EmployeeDoesNotBelongToOrganizationException(command.OrganizationId, command.UserId);
 
-            if (command.NewRole != RoleInOrganization.Role.None && command.NewRole != RoleInOrganization.Role.Moderator)
+            bool isPermitted = command.NewRole != RoleInOrganization.Role.None && command.NewRole != RoleInOrganization.Role.Moderator;
+
+            if (isPermitted)
                 throw new MissingPermissionException();
 
             employee.UpdateRole(command.NewRole);

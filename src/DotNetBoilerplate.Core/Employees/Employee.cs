@@ -1,4 +1,6 @@
-﻿namespace DotNetBoilerplate.Core.Employees
+﻿using DotNetBoilerplate.Core.Organizations.Exceptions;
+
+namespace DotNetBoilerplate.Core.Employees
 {
     public class Employee
     {
@@ -13,27 +15,24 @@
             Role = role;
         }
 
-        public  bool isAdmin(Guid Id)
+        public  bool IsAdmin(Guid Id)
         {
-            return this.UserId == Id && this.Role == RoleInOrganization.Role.Admin;
+            return UserId == Id && Role == RoleInOrganization.Role.Admin;
         }
 
-        public void SetOrganizationId(Guid OrganizationId)
+        public void SetOrganizationId(Guid organizationId)
         {
-            this.OrganizationId = OrganizationId;
+            OrganizationId = OrganizationId;
         }
         
         public void SetRoleAdmin(Guid userId, Guid organizationId)
         {
-            if (this.UserId == userId && this.Role == RoleInOrganization.Role.None)
+            if (UserId == userId && Role == RoleInOrganization.Role.None)
             {
-                this.Role = RoleInOrganization.Role.Admin;
-                this.OrganizationId = organizationId;
+                Role = RoleInOrganization.Role.Admin;
+                OrganizationId = organizationId;
             }
-            else if (this.UserId == userId && this.Role != RoleInOrganization.Role.None && this.OrganizationId != organizationId)
-            {
-                throw new Exception("User already has a role in another organization");
-            }
+            else UserInOrganization(userId, organizationId);
         }
 
         public static Employee Create (
@@ -49,6 +48,12 @@
                 OrganizationId = organizationId,
                 Role = role
             };
+        }
+
+        public void UserInOrganization(Guid userId, Guid organizationId)
+        {
+            if (UserId == userId && Role != RoleInOrganization.Role.None && OrganizationId != organizationId)
+                throw new UserInOrganizationException();
         }
     }
 }
