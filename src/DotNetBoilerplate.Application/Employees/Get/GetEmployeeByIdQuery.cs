@@ -1,5 +1,4 @@
-﻿using DotNetBoilerplate.Application.Employees.Get;
-using DotNetBoilerplate.Shared.Abstractions.Queries;
+﻿using DotNetBoilerplate.Shared.Abstractions.Queries;
 
 namespace DotNetBoilerplate.Application.Employees.Get
 {

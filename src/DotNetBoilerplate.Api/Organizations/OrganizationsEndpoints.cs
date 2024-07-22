@@ -14,7 +14,8 @@
                 .MapEndpoint<UpdateOrganizationEndpoint>()
                 .MapEndpoint<BrowseOrganizationsEndpoint>()
                 .MapEndpoint<GetOrganizationByIdEndpoint>()
-                .MapEndpoint<AddMemberToOrganizationEndpoint>();
+                .MapEndpoint<AddMemberToOrganizationEndpoint>()
+                .MapEndpoint<BrowseOrganizationMembersEndpoint>();
         }
     }
 }

@@ -5,25 +5,25 @@ using DotNetBoilerplate.Application.Employees.Delete;
 
 namespace DotNetBoilerplate.Api.Employees
 {
-    internal sealed class DeleteEmployeeFromOrganizationEndpoint : IEndpoint
+    internal sealed class DeleteEmployeeEndpoint : IEndpoint
     {
         public static void Map(IEndpointRouteBuilder app)
         {
             app.MapDelete("{employeeId:guid}", Handle)
                 .RequireAuthorization()
-                .WithSummary("Delete employee from organization");
+                .WithSummary("Delete employee");
         }
-
+         
         private static async Task<Ok<Response>> Handle(
             Guid employeeId,
             [FromServices] ICommandDispatcher commandDispatcher,
             CancellationToken ct
             )
         {
-            var command = new DeleteEmployeeFromOrganizationCommand(employeeId);
+            var command = new DeleteEmployeeCommand(employeeId);
 
             await commandDispatcher
-                .DispatchAsync<DeleteEmployeeFromOrganizationCommand>(command, ct);
+                .DispatchAsync<DeleteEmployeeCommand>(command, ct);
 
             return TypedResults.Ok(new Response());
         }

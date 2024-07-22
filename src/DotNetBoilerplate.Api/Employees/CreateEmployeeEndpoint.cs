@@ -23,7 +23,7 @@ namespace DotNetBoilerplate.Api.Employees
             CancellationToken ct
         )
         {
-            var command = new CreateEmployeeCommand(request.UserId, request.OrganizationId, request.Role);
+            var command = new CreateEmployeeCommand(request.UserId, request.OrganizationId);
 
             var result = await commandDispatcher
                 .DispatchAsync<CreateEmployeeCommand, Guid>(command, ct);
@@ -39,7 +39,6 @@ namespace DotNetBoilerplate.Api.Employees
         {
             [Required] public Guid UserId { get; init; }
             [Required] public Guid OrganizationId { get; init; }
-            [JsonConverter(typeof(JsonStringEnumConverter))] public RoleInOrganization.Role Role {  get; init; } 
         }
     }
 }

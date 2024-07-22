@@ -13,7 +13,6 @@ internal sealed class SignUpHandler : ICommandHandler<SignUpCommand>
     private readonly IPasswordManager _passwordManager;
     private readonly IUserReadService _userReadService;
     private readonly IUserRepository _userRepository;
-    private readonly IEmployeeRepository _employeeRepository;
 
     public SignUpHandler(IUserRepository userRepository, IUserReadService userReadService,
         IPasswordManager passwordManager, IClock clock, IEmployeeRepository employeeRepository)
@@ -22,7 +21,6 @@ internal sealed class SignUpHandler : ICommandHandler<SignUpCommand>
         _userReadService = userReadService;
         _passwordManager = passwordManager;
         _clock = clock;
-        _employeeRepository = employeeRepository;
     }
 
     public async Task HandleAsync(SignUpCommand command)
@@ -36,7 +34,5 @@ internal sealed class SignUpHandler : ICommandHandler<SignUpCommand>
       
         var user = User.New(command.UserId, email, username, password, _clock.Now());
         await _userRepository.AddAsync(user);
-        var employee = Employee.Create(command.UserId, Guid.Empty, RoleInOrganization.Role.None);
-        await _employeeRepository.AddAsync(employee);
     }
 }

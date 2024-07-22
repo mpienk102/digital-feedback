@@ -11,7 +11,7 @@ namespace DotNetBoilerplate.Application.Employees.Get
         public async Task<EmployeeDto> HandleAsync(GetEmployeeByIdQuery query)
         {
             var employee = await employeeRepository.GetByIdAsync(query.EmployeeId);
-            if (employee is null) throw new Exception("Employye is null exception")
+            if (employee is null) throw new Exception("Employye is null exception");
 
             return new EmployeeDto(
                 employee.EmployeeId,

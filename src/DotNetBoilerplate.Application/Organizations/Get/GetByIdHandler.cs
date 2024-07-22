@@ -20,8 +20,7 @@ namespace DotNetBoilerplate.Application.Organizations.Read
                 organization.Id,
                 organization.Name,
                 organization.OwnerId,
-                organization.CreatedAt.UtcDateTime,
-                organization.Members
+                organization.CreatedAt.UtcDateTime
             );
         }
     }

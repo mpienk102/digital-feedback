@@ -42,7 +42,20 @@ namespace DotNetBoilerplate.Infrastructure.DAL.Repositories
 
         public Task DeleteAsync(Employee employee)
         {
-            throw new NotImplementedException();
+            employees.Remove(employee);
+            return Task.CompletedTask;
+        }
+
+        public Task<bool> ExistsByUserIdAsync(Guid userId)
+        {
+            var exists = employees.Exists(x => x.UserId == userId);
+            return Task.FromResult(exists);
+        }
+
+        public Task<List<Employee>> BrowseByOrganizationId(Guid organizationId)
+        {
+            var organizationEmployees = employees.Where(x => x.OrganizationId == organizationId).ToList();
+            return Task.FromResult(organizationEmployees);
         }
     }
 }

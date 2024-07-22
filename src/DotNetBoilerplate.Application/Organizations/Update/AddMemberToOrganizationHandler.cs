@@ -20,30 +20,26 @@ namespace DotNetBoilerplate.Application.Organizations.Update
     {
         public async Task<Guid> HandleAsync(AddMemberToOrganizationCommand command )
         {
+            var organization = await organizationRepository.GetByIdAsync(command.OrganizationId);
+
+            if (organization is null)
+                throw new OrganizationNotFoundException(command.OrganizationId);
+
             var admin = await employeeRepository.GetByIdAsync(context.Identity.Id);
 
             if (admin.IsAdmin(context.Identity.Id))
                 throw new MissingAdminRoleException(command.OrganizationId);
 
-            var organization = await organizationRepository.GetByIdAsync(command.OrganizationId);
+            if (admin.OrganizationId != organization.Id)
+                throw new AdminIsInDifferentOrganizationException();
 
             var employee = await employeeRepository.GetByIdAsync(command.EmployeeId);
-
-
-
-            // if (employee is null || organization is null) 
-            //    throw new Exception("Given organization or employee does not exist");
-            if (organization is null)
-                throw new OrganizationNotFoundException(command.OrganizationId);
-            if (employee is null)
-                throw new EmployeeNotFoundException(command.EmployeeId);
-
-            organization.AddMember(employee.UserId);
 
             employee.UpdateRole(command.Role);
 
             await organizationRepository.UpdateAsync(organization);
-            await employeeRepository.UpdateAsync(employee); 
+            await employeeRepository.UpdateAsync(employee);
+
 
             return organization.Id;
             

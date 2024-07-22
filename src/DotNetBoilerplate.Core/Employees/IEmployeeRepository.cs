@@ -8,5 +8,7 @@
         Task AddAsync(Employee employee);
         Task UpdateAsync(Employee employee);
         Task DeleteAsync(Employee employee);
+        Task<bool> ExistsByUserIdAsync(Guid userId);
+        Task<List<Employee>> BrowseByOrganizationId(Guid organizationId);
     }
 }

@@ -12,9 +12,9 @@ namespace DotNetBoilerplate.Application.Employees.Create
         public async Task<Guid> HandleAsync(CreateEmployeeCommand command)
         {
             var employee = Employee.Create(
-                context.Identity.Id,
+                command.UserId,
                 command.OrganizationId,
-                command.Role
+                RoleInOrganization.Role.None
             );
 
             await employeeRepository.AddAsync(employee);
