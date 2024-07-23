@@ -2,5 +2,5 @@
 
 namespace DotNetBoilerplate.Application.Organizations.Update
 {
-    public sealed record UpdateOrganizationCommand(Guid Id, Guid MemberId, string Name) : ICommand;
+    public sealed record UpdateOrganizationCommand(Guid Id, string Name) : ICommand;
 }

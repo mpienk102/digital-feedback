@@ -25,7 +25,7 @@ internal sealed class UpdateOrganizationEndpoint : IEndpoint
         CancellationToken ct
     )
     {
-        var command = new UpdateOrganizationCommand(id, request.MemberId, request.Name);
+        var command = new UpdateOrganizationCommand(id, request.Name);
 
         await commandDispatcher.DispatchAsync(command, ct);
 
