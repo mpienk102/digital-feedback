@@ -5,5 +5,5 @@ public interface IUserReadService
     Task<bool> ExistsByEmailAsync(Email email);
     Task<bool> ExistsByUsernameAsync(Username username);
     Task<User> GetByEmailAsync(Email email);
-    Task<bool> ExistsByIdAsync(UserId id);
+    Task<bool> ExistsByIdAsync(Guid id);
 }

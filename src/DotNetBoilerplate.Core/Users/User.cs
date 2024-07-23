@@ -4,7 +4,7 @@ namespace DotNetBoilerplate.Core.Users;
 
 public class User : Entity
 {
-    private User(UserId id, Email email, Username username, Password password, Role role, DateTime createdAt,
+    private User(Guid id, Email email, Username username, Password password, Role role, DateTime createdAt,
         AccountType accountType)
     {
         Id = id;
@@ -20,7 +20,7 @@ public class User : Entity
     {
     }
 
-    public UserId Id { get; private set; }
+    public Guid Id { get; private set; }
     public Email Email { get; private set; }
     public Username Username { get; private set; }
     public Password Password { get; private set; }
@@ -33,12 +33,12 @@ public class User : Entity
         AccountType = accountType;
     }
 
-    public static User New(UserId id, Email email, Username username, Password password, DateTime createdAt)
+    public static User New(Guid id, Email email, Username username, Password password, DateTime createdAt)
     {
         return new User(id, email, username, password, Role.User(), createdAt, AccountType.Free());
     }
 
-    public static User NewAdmin(UserId id, Email email, Password password, DateTime createdAt)
+    public static User NewAdmin(Guid id, Email email, Password password, DateTime createdAt)
     {
         return new User(id, email, "ADMIN", password, Role.Admin(), createdAt, AccountType.Extended());
     }

@@ -1,13 +1,14 @@
 ﻿using DotNetBoilerplate.Core.Organizations.Exceptions;
+using DotNetBoilerplate.Core.Users;
 
 namespace DotNetBoilerplate.Core.Employees
 {
     public class Employee
     {
         private Employee() { }
-        public Guid EmployeeId { get; private set; }
+        public System.Guid Id { get; private set; }
         public Guid UserId { get; private set; }
-        public Guid OrganizationId { get; private set; }
+        public System.Guid OrganizationId { get; private set; }
         public RoleInOrganization.Role Role { get; private set; }
 
         public void UpdateRole(RoleInOrganization.Role role)
@@ -15,17 +16,17 @@ namespace DotNetBoilerplate.Core.Employees
             Role = role;
         }
 
-        public  bool IsAdmin(Guid Id)
+        public bool IsAdmin(System.Guid id)
         {
-            return UserId == Id && Role == RoleInOrganization.Role.Admin;
+            return UserId == id && Role == RoleInOrganization.Role.Admin;
         }
 
-        public void SetOrganizationId(Guid organizationId)
+        public void SetOrganizationId(System.Guid organizationId)
         {
-            OrganizationId = OrganizationId;
+            OrganizationId = organizationId;
         }
-        
-        public void SetRoleAdmin(Guid userId, Guid organizationId)
+
+        public void SetRoleAdmin(System.Guid userId, System.Guid organizationId)
         {
             if (UserId == userId && Role == RoleInOrganization.Role.None)
             {
@@ -35,23 +36,22 @@ namespace DotNetBoilerplate.Core.Employees
             else UserInOrganization(userId, organizationId);
         }
 
-
-        public static Employee Create (
-            Guid userId,
-            Guid organizationId,
+        public static Employee Create(
+            System.Guid userId,
+            System.Guid organizationId,
             RoleInOrganization.Role role
         )
         {
             return new Employee
             {
-                EmployeeId = Guid.NewGuid(),
+                Id = System.Guid.NewGuid(),
                 UserId = userId,
                 OrganizationId = organizationId,
                 Role = role
             };
         }
 
-        public void UserInOrganization(Guid userId, Guid organizationId)
+        public void UserInOrganization(System.Guid userId, System.Guid organizationId)
         {
             if (UserId == userId && Role != RoleInOrganization.Role.None && OrganizationId != organizationId)
                 throw new UserInOrganizationException();

@@ -14,7 +14,7 @@ namespace DotNetBoilerplate.Application.Employees.Get
             if (employee is null) throw new Exception("Employye is null exception");
 
             return new EmployeeDto(
-                employee.EmployeeId,
+                employee.Id,
                 employee.UserId,
                 employee.OrganizationId,
                 employee.Role

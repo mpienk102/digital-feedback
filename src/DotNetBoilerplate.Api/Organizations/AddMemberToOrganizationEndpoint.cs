@@ -18,20 +18,20 @@ namespace DotNetBoilerplate.Api.Organizations
         }
         private static async Task<IResult> Handle(
             [FromServices] ICommandDispatcher commandDispatcher,
-            [FromRoute] Guid OrganizationId,
+            [FromRoute] System.Guid OrganizationId,
             [FromBody] Request request,
             CancellationToken ct
         )
         {
             var command = new AddMemberToOrganizationCommand(request.UserId, OrganizationId, request.Role);
 
-            await commandDispatcher.DispatchAsync<AddMemberToOrganizationCommand, Guid>(command);
+            await commandDispatcher.DispatchAsync<AddMemberToOrganizationCommand, System.Guid>(command);
 
             return TypedResults.Ok();
         }
         private sealed class Request
         {
-            [Required] public Guid UserId { get; init; }
+            [Required] public System.Guid UserId { get; init; }
 
 
             [JsonConverter(typeof(JsonStringEnumConverter))] public RoleInOrganization.Role Role { get; init; }

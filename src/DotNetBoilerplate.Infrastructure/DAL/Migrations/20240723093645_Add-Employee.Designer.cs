@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DotNetBoilerplate.Infrastructure.DAL.Migrations
 {
     [DbContext(typeof(DotNetBoilerplateWriteDbContext))]
-    [Migration("20240723080018_Add-Organization")]
-    partial class AddOrganization
+    [Migration("20240723093645_Add-Employee")]
+    partial class AddEmployee
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,6 +25,30 @@ namespace DotNetBoilerplate.Infrastructure.DAL.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+
+            modelBuilder.Entity("DotNetBoilerplate.Core.Employees.Employee", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("OrganizationId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("Role")
+                        .HasColumnType("integer");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrganizationId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Employees", "dotNetBoilerplate");
+                });
 
             modelBuilder.Entity("DotNetBoilerplate.Core.Organizations.Organization", b =>
                 {
@@ -54,6 +78,7 @@ namespace DotNetBoilerplate.Infrastructure.DAL.Migrations
             modelBuilder.Entity("DotNetBoilerplate.Core.Users.User", b =>
                 {
                     b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<string>("AccountType")
@@ -113,6 +138,21 @@ namespace DotNetBoilerplate.Infrastructure.DAL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("OutboxMessages", "dotNetBoilerplate");
+                });
+
+            modelBuilder.Entity("DotNetBoilerplate.Core.Employees.Employee", b =>
+                {
+                    b.HasOne("DotNetBoilerplate.Core.Organizations.Organization", null)
+                        .WithMany()
+                        .HasForeignKey("OrganizationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DotNetBoilerplate.Core.Users.User", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("DotNetBoilerplate.Core.Organizations.Organization", b =>

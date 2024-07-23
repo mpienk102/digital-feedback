@@ -1,4 +1,5 @@
-﻿using DotNetBoilerplate.Core.Organizations;
+﻿using DotNetBoilerplate.Core.Employees;
+using DotNetBoilerplate.Core.Organizations;
 using DotNetBoilerplate.Core.Users;
 using DotNetBoilerplate.Infrastructure.DAL.Configurations.Write;
 using DotNetBoilerplate.Shared.Abstractions.Outbox;
@@ -14,6 +15,8 @@ internal sealed class DotNetBoilerplateWriteDbContext(DbContextOptions<DotNetBoi
 
     public DbSet<Organization> Organizations { get; set; }
 
+    public DbSet<Employee> Employees { get; set; } 
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.HasDefaultSchema("dotNetBoilerplate");
@@ -21,5 +24,6 @@ internal sealed class DotNetBoilerplateWriteDbContext(DbContextOptions<DotNetBoi
         modelBuilder.ApplyConfiguration(new UserWriteConfiguration());
         modelBuilder.ApplyConfiguration(new OutboxMessageWriteConfiguration());
         modelBuilder.ApplyConfiguration(new OrganizationWriteConfiguration());
+        modelBuilder.ApplyConfiguration(new EmployeeWriteConfiguration());
     }
 }

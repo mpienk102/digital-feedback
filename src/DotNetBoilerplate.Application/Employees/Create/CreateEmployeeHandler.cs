@@ -19,7 +19,7 @@ namespace DotNetBoilerplate.Application.Employees.Create
 
             await employeeRepository.AddAsync(employee);
 
-            return employee.EmployeeId;
+            return employee.Id;
         }
     }
 }

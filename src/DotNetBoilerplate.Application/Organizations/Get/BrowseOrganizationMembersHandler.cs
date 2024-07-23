@@ -12,7 +12,7 @@ namespace DotNetBoilerplate.Application.Organizations.Get
         public async Task<List<EmployeeListDto>> HandleAsync(BrowseOrganizationMembersQuery query)
         {
             var employees = await employeeRepository.BrowseByOrganizationId(query.organizationId);
-            return employees.Select(e => new EmployeeListDto(e.EmployeeId, e.Role)).ToList();
+            return employees.Select(e => new EmployeeListDto(e.Id, e.Role)).ToList();
         }
     }
 

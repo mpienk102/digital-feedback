@@ -3,6 +3,7 @@ using System;
 using DotNetBoilerplate.Infrastructure.DAL.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace DotNetBoilerplate.Infrastructure.DAL.Migrations
 {
     [DbContext(typeof(DotNetBoilerplateWriteDbContext))]
-    partial class DotNetBoilerplateWriteDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240723085022_Add-Organization")]
+    partial class AddOrganization
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,30 +25,6 @@ namespace DotNetBoilerplate.Infrastructure.DAL.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
-
-            modelBuilder.Entity("DotNetBoilerplate.Core.Employees.Employee", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("OrganizationId")
-                        .HasColumnType("uuid");
-
-                    b.Property<int>("Role")
-                        .HasColumnType("integer");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("OrganizationId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Employees", "dotNetBoilerplate");
-                });
 
             modelBuilder.Entity("DotNetBoilerplate.Core.Organizations.Organization", b =>
                 {
@@ -75,7 +54,6 @@ namespace DotNetBoilerplate.Infrastructure.DAL.Migrations
             modelBuilder.Entity("DotNetBoilerplate.Core.Users.User", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
                     b.Property<string>("AccountType")
@@ -135,21 +113,6 @@ namespace DotNetBoilerplate.Infrastructure.DAL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("OutboxMessages", "dotNetBoilerplate");
-                });
-
-            modelBuilder.Entity("DotNetBoilerplate.Core.Employees.Employee", b =>
-                {
-                    b.HasOne("DotNetBoilerplate.Core.Organizations.Organization", null)
-                        .WithMany()
-                        .HasForeignKey("OrganizationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("DotNetBoilerplate.Core.Users.User", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("DotNetBoilerplate.Core.Organizations.Organization", b =>

@@ -9,7 +9,7 @@ internal sealed class UserWriteConfiguration : IEntityTypeConfiguration<User>
     public void Configure(EntityTypeBuilder<User> builder)
     {
         builder.HasKey(x => x.Id);
-        builder.Property(x => x.Id).HasConversion(x => x.Value, x => new UserId(x));
+        builder.Property(x => x.Id);
 
         builder.HasIndex(x => x.Email).IsUnique();
         builder.Property(x => x.Email).HasConversion(x => x.Value, x => new Email(x));

@@ -15,7 +15,7 @@ namespace DotNetBoilerplate.Infrastructure.DAL.Repositories
 
         public Task<Employee> GetByIdAsync(Guid id)
         {
-            var employee = employees.Find(x => x.EmployeeId == id);
+            var employee = employees.Find(x => x.Id == id);
 
             return Task.FromResult(employee);
         }
@@ -34,7 +34,7 @@ namespace DotNetBoilerplate.Infrastructure.DAL.Repositories
 
         public Task UpdateAsync(Employee employee)
         {
-            var index = employees.FindIndex(x => x.EmployeeId == employee.EmployeeId);
+            var index = employees.FindIndex(x => x.Id == employee.Id);
             employees[index] = employee;
 
             return Task.CompletedTask;

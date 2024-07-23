@@ -14,7 +14,7 @@ namespace DotNetBoilerplate.Application.Employees.Get
             if (query.Role is not null)
                 employees = employees.Where(e => e.Role == query.Role).ToList();
 
-            return employees.Select(e => new EmployeeDto(e.EmployeeId, e.UserId, e.OrganizationId, e.Role)).ToList();
+            return employees.Select(e => new EmployeeDto(e.Id, e.UserId, e.OrganizationId, e.Role)).ToList();
         }
     }
 

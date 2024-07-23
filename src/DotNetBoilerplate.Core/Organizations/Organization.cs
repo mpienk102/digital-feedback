@@ -9,9 +9,9 @@ public class Organization
     {
     }
 
-    public Guid Id { get; private set; }
+    public System.Guid Id { get; private set; }
     public string Name { get; private set; }
-    public UserId OwnerId { get; private set; }
+    public Guid OwnerId { get; private set; }
 
     public DateTimeOffset CreatedAt { get; private set; }
 
@@ -26,7 +26,7 @@ public class Organization
 
     public static Organization Create(
         string name,
-        Guid ownerId,
+        System.Guid ownerId,
         DateTimeOffset now,
         bool nameIsUnique
     )
@@ -36,7 +36,7 @@ public class Organization
 
         return new Organization
         {
-            Id = Guid.NewGuid(),
+            Id = System.Guid.NewGuid(),
             Name = name,
             OwnerId = ownerId,
             CreatedAt = now
