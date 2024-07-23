@@ -14,9 +14,9 @@ internal static class Extensions
 
         services.AddScoped<IOrganizationsRepository, PostgresOrganizationsRepository>();
 
-        services.AddSingleton<IProjectRepository, InMemoryProjectsRepository>();
+        services.AddScoped<IProjectRepository, PostgresProjectsRepository>();
 
-        services.AddScoped<IEmployeeRepository, PostgresEmployeesRepository>(); // zmienic na postgres!!!
+        services.AddScoped<IEmployeeRepository, PostgresEmployeesRepository>(); 
 
         return services;
     }

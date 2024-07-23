@@ -1,5 +1,6 @@
 ﻿using DotNetBoilerplate.Core.Employees;
 using DotNetBoilerplate.Core.Organizations;
+using DotNetBoilerplate.Core.Projects;
 using DotNetBoilerplate.Core.Users;
 using DotNetBoilerplate.Infrastructure.DAL.Configurations.Write;
 using DotNetBoilerplate.Shared.Abstractions.Outbox;
@@ -17,13 +18,16 @@ internal sealed class DotNetBoilerplateWriteDbContext(DbContextOptions<DotNetBoi
 
     public DbSet<Employee> Employees { get; set; } 
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        modelBuilder.HasDefaultSchema("dotNetBoilerplate");
+    public DbSet<Project> Projects { get; set; }
 
-        modelBuilder.ApplyConfiguration(new UserWriteConfiguration());
-        modelBuilder.ApplyConfiguration(new OutboxMessageWriteConfiguration());
-        modelBuilder.ApplyConfiguration(new OrganizationWriteConfiguration());
-        modelBuilder.ApplyConfiguration(new EmployeeWriteConfiguration());
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {         
+        modelBuilder
+            .HasDefaultSchema("dotNetBoilerplate")
+            .ApplyConfiguration(new UserWriteConfiguration())
+            .ApplyConfiguration(new OutboxMessageWriteConfiguration())
+            .ApplyConfiguration(new OrganizationWriteConfiguration())
+            .ApplyConfiguration(new EmployeeWriteConfiguration())
+            .ApplyConfiguration(new ProjectWriteConfiguration());
     }
 }
