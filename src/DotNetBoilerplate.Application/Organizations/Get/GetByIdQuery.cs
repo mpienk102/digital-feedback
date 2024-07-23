@@ -1,8 +1,5 @@
-﻿using DotNetBoilerplate.Shared.Abstractions.Commands;
-using DotNetBoilerplate.Shared.Abstractions.Queries;
-using System.Windows.Input;
+﻿using DotNetBoilerplate.Shared.Abstractions.Queries;
 
-namespace DotNetBoilerplate.Application.Organizations.Read
-{
-    public record GetByIdQuery(Guid Id) : IQuery<OrganizationDto>;
-}
+namespace DotNetBoilerplate.Application.Organizations.Get;
+
+public record GetByIdQuery(Guid Id) : IQuery<OrganizationDto>;

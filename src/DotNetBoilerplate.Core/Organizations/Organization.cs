@@ -1,4 +1,5 @@
 ﻿using DotNetBoilerplate.Core.Organizations.Exceptions;
+using DotNetBoilerplate.Core.Users;
 
 namespace DotNetBoilerplate.Core.Organizations;
 
@@ -10,8 +11,10 @@ public class Organization
 
     public Guid Id { get; private set; }
     public string Name { get; private set; }
-    public Guid OwnerId { get; private set; }
+    public UserId OwnerId { get; private set; }
+
     public DateTimeOffset CreatedAt { get; private set; }
+
     public void UpdateName(string name, bool nameIsUnique)
     {
         if (!nameIsUnique)
@@ -19,6 +22,7 @@ public class Organization
 
         Name = name;
     }
+
 
     public static Organization Create(
         string name,
