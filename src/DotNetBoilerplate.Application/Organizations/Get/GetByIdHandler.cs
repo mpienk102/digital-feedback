@@ -13,13 +13,12 @@ internal sealed class GetByIdHandler(
         var organization = await organizationsRepository.GetByIdAsync(query.Id);
         if (organization is null) throw new OrganizationIsNullException(query.Id);
 
-        return new OrganizationDto(
-            organization.Id,
-            organization.Name,
-            organization.OwnerId,
-            organization.CreatedAt.UtcDateTime,
-            []
-            //organization.Members
-        );
+            return new OrganizationDto(
+                organization.Id,
+                organization.Name,
+                organization.OwnerId,
+                organization.CreatedAt.UtcDateTime
+            );
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 using DotNetBoilerplate.Application.Employees.Update;
 using DotNetBoilerplate.Shared.Abstractions.Commands;
 using Microsoft.AspNetCore.Http.HttpResults;
@@ -11,7 +12,7 @@ namespace DotNetBoilerplate.Api.Employees
     {
         public static void Map(IEndpointRouteBuilder app)
         {
-            app.MapPut("{id:guid}", Handle)
+            app.MapPut("{id:guid}/role", Handle)
                 .RequireAuthorization()
                 .WithSummary("Update employee role");
         }
@@ -33,7 +34,7 @@ namespace DotNetBoilerplate.Api.Employees
         private sealed class Request
         {
             [Required] public Guid OrganizationId { get; init; }
-            [Required] public Role NewRole { get; init; }
+            [JsonConverter(typeof(JsonStringEnumConverter))] public Role NewRole { get; init; }
         }
     }
 }

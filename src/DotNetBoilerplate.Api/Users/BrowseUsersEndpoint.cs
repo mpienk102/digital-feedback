@@ -3,6 +3,7 @@ using DotNetBoilerplate.Shared.Abstractions.Queries;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
+
 namespace DotNetBoilerplate.Api.Users
 {
     public class BrowseUsersEndpoint : IEndpoint

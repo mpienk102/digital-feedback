@@ -13,31 +13,49 @@ namespace DotNetBoilerplate.Infrastructure.DAL.Repositories
             return Task.FromResult(employee);
         }
 
-        public Task<Employee> GetByIdAsync(Guid id) { 
+        public Task<Employee> GetByIdAsync(Guid id)
+        {
             var employee = employees.Find(x => x.EmployeeId == id);
 
             return Task.FromResult(employee);
         }
 
-        public Task<List<Employee>> GetAllAsync() { 
+        public Task<List<Employee>> GetAllAsync()
+        {
             return Task.FromResult(employees);
         }
 
-        public Task AddAsync(Employee employee) { 
+        public Task AddAsync(Employee employee)
+        {
             employees.Add(employee);
 
             return Task.CompletedTask;
         }
 
-        public Task UpdateAsync(Employee employee) { 
+        public Task UpdateAsync(Employee employee)
+        {
             var index = employees.FindIndex(x => x.EmployeeId == employee.EmployeeId);
             employees[index] = employee;
 
             return Task.CompletedTask;
         }
 
-        public Task DeleteAsync(Employee employee) { 
-            throw new NotImplementedException();
+        public Task DeleteAsync(Employee employee)
+        {
+            employees.Remove(employee);
+            return Task.CompletedTask;
+        }
+
+        public Task<bool> ExistsByUserIdAsync(Guid userId)
+        {
+            var exists = employees.Exists(x => x.UserId == userId);
+            return Task.FromResult(exists);
+        }
+
+        public Task<List<Employee>> BrowseByOrganizationId(Guid organizationId)
+        {
+            var organizationEmployees = employees.Where(x => x.OrganizationId == organizationId).ToList();
+            return Task.FromResult(organizationEmployees);
         }
     }
 }

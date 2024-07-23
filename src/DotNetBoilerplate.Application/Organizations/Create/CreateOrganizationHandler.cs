@@ -3,12 +3,12 @@ using DotNetBoilerplate.Core.Organizations;
 using DotNetBoilerplate.Shared.Abstractions.Commands;
 using DotNetBoilerplate.Shared.Abstractions.Contexts;
 using DotNetBoilerplate.Shared.Abstractions.Time;
+using DotNetBoilerplate.Application.Organizations.Exceptions;
+namespace DotNetBoilerplate.Application.Organizations.Create;
 
-namespace DotNetBoilerplate.Application.Organizations.Create
-{
     internal sealed class CreateOrganizationHandler(
         IOrganizationsRepository organizationsRepository,
-        IEmployeeRepository employeesRepository,
+        IEmployeeRepository employeeRepository,
         IContext context,
         IClock clock
     ) : ICommandHandler<CreateOrganizationCommand, Guid>
@@ -24,29 +24,19 @@ namespace DotNetBoilerplate.Application.Organizations.Create
                 isNameUnique
             );
 
-            var employee = await employeesRepository.GetByUserIdAsync(context.Identity.Id);
+            await organizationsRepository.AddAsync(organization);
 
-            if (employee == null)
-            {
-                employee = Employee.Create(
+        if (await employeeRepository.ExistsByUserIdAsync(context.Identity.Id) is false)
+        { 
+            var employee = Employee.Create(
                     context.Identity.Id,
                     organization.Id,
-                    RoleInOrganization.Role.None
-                );
-                await employeesRepository.AddAsync(employee);
-            }
+                    RoleInOrganization.Role.Admin
+            );
 
-            employee.SetRoleAdmin(context.Identity.Id, organization.Id);
-
-            await employeesRepository.UpdateAsync(employee);
-
-            Console.WriteLine(employee.isAdmin(context.Identity.Id));
-
-            organization.AddMember(context.Identity.Id);
-
-            await organizationsRepository.AddAsync(organization);
+            await employeeRepository.AddAsync(employee);
+        }
 
             return organization.Id;
         }
     }
-}

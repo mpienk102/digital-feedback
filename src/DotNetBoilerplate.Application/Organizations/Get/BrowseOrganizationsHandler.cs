@@ -9,10 +9,16 @@ internal sealed class BrowseOrganizationsHandler(
 {
     public async Task<List<OrganizationDto>> HandleAsync(BrowseOrganizationsQuery query)
     {
-        var organizations = await organizationsRepository.GetAllAsync();
-        return organizations.Select(o => new OrganizationDto(o.Id, o.Name, o.OwnerId, o.CreatedAt.UtcDateTime, []))
-            .ToList();
+
+        public async Task<List<OrganizationDto>> HandleAsync(BrowseOrganizationsQuery query)
+        {
+            var organizations = await organizationsRepository.GetAllAsync();
+            return organizations.Select(o => new OrganizationDto(o.Id, o.Name, o.OwnerId, o.CreatedAt.UtcDateTime)).ToList();
+        }
     }
+
+    public record OrganizationDto(Guid Id, string Name, Guid CreatedBy, DateTime CreatedAt);
+
 }
 
 public record OrganizationDto(Guid Id, string Name, Guid CreatedBy, DateTime CreatedAt, List<Guid> Members);

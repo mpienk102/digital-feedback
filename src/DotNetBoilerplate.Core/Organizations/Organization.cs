@@ -14,7 +14,6 @@ public class Organization
     public UserId OwnerId { get; private set; }
 
     public DateTimeOffset CreatedAt { get; private set; }
-    //public List<Guid> Members = new List<Guid>();
 
     public void UpdateName(string name, bool nameIsUnique)
     {
@@ -24,10 +23,6 @@ public class Organization
         Name = name;
     }
 
-    public void AddMember(Guid memberId)
-    {
-        //if (!Members.Contains(memberId)) Members.Add(memberId);
-    }
 
     public static Organization Create(
         string name,

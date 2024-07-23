@@ -15,7 +15,6 @@ internal sealed class UpdateOrganizationHandler(
 
         var isNameUnique = await organizationsRepository.IsOrganizationNameUniqueAsync(command.Name, organization.Id);
 
-        organization.AddMember(command.MemberId);
         organization.UpdateName(command.Name, isNameUnique);
 
         await organizationsRepository.UpdateAsync(organization);
