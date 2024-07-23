@@ -39,7 +39,6 @@ internal sealed class UpdateOrganizationEndpoint : IEndpoint
     );
     private sealed class Request
     {
-        [Required] public Guid MemberId { get; init; }
         [Required] public string Name { get; init; }
     }
 }
