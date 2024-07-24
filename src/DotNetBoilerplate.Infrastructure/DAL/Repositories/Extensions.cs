@@ -2,6 +2,7 @@
 using DotNetBoilerplate.Core.Organizations;
 using DotNetBoilerplate.Core.Projects;
 using DotNetBoilerplate.Core.Users;
+using DotNetBoilerplate.Core.Forms;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace DotNetBoilerplate.Infrastructure.DAL.Repositories;
@@ -17,6 +18,8 @@ internal static class Extensions
         services.AddScoped<IProjectRepository, PostgresProjectsRepository>();
 
         services.AddScoped<IEmployeeRepository, PostgresEmployeesRepository>(); 
+
+        services.AddSingleton<IFormRepository, InMemoryFormRepository>(); 
 
         return services;
     }

@@ -1,5 +1,6 @@
 using System.Text.Json.Serialization;
 using DotNetBoilerplate.Api.Employees;
+using DotNetBoilerplate.Api.Forms;
 using DotNetBoilerplate.Api.Organizations;
 using DotNetBoilerplate.Api.Projects;
 using DotNetBoilerplate.Api.Users;
@@ -29,5 +30,7 @@ app.MapProjectsEndpoints();
 app.MapEmployeesEndpoints();
 
 app.UseInfrastructure();
+
+app.MapFormsEndpoints();
 
 await app.RunAsync();
