@@ -8,14 +8,14 @@ namespace DotNetBoilerplate.Core.Forms
     public class Form
     {
         private Form() { }
-        public Guid Id { get; set; }
+        public Guid Id { get; private set; }
 
-        public string Name { get; set; }
-        public string Description { get; set; }
+        public string Name { get; private set; }
+        public string Description { get; private set; }
 
-        public Guid CreatorId { get; set; }
+        public Guid CreatorId { get; private set; }
 
-        public DateTimeOffset CreatedAt { get; set; }
+        public DateTimeOffset CreatedAt { get; private set; }
 
         public static Form Create(
             string name,

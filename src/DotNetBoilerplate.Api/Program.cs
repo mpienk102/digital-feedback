@@ -3,6 +3,7 @@ using DotNetBoilerplate.Api.Employees;
 using DotNetBoilerplate.Api.Forms;
 using DotNetBoilerplate.Api.Organizations;
 using DotNetBoilerplate.Api.Projects;
+using DotNetBoilerplate.Api.Questions;
 using DotNetBoilerplate.Api.Users;
 using DotNetBoilerplate.Application;
 using DotNetBoilerplate.Core;
@@ -32,5 +33,7 @@ app.MapEmployeesEndpoints();
 app.UseInfrastructure();
 
 app.MapFormsEndpoints();
+
+app.MapQuestionsEndpoints();
 
 await app.RunAsync();
