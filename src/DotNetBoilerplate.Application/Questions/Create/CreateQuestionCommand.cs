@@ -5,5 +5,5 @@ using DotNetBoilerplate.Shared.Abstractions.Commands;
 
 namespace DotNetBoilerplate.Application.Questions.Create
 {
-    public sealed record CreateQuestionCommand(Guid formId, string questionText) : ICommand<Guid>;
+    public sealed record CreateQuestionCommand(Guid formId, string questionText, QuestionTypeInForm.Type questionType) : ICommand<Guid>;
 }
