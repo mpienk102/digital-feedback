@@ -6,9 +6,9 @@ namespace DotNetBoilerplate.Core.Employees
     public class Employee
     {
         private Employee() { }
-        public System.Guid Id { get; private set; }
+        public Guid Id { get; private set; }
         public Guid UserId { get; private set; }
-        public System.Guid OrganizationId { get; private set; }
+        public Guid OrganizationId { get; private set; }
         public RoleInOrganization.Role Role { get; private set; }
 
         public void UpdateRole(RoleInOrganization.Role role)
@@ -16,17 +16,17 @@ namespace DotNetBoilerplate.Core.Employees
             Role = role;
         }
 
-        public bool IsAdmin(System.Guid id)
+        public bool IsAdmin(Guid id)
         {
             return UserId == id && Role == RoleInOrganization.Role.Admin;
         }
 
-        public void SetOrganizationId(System.Guid organizationId)
+        public void SetOrganizationId(Guid organizationId)
         {
             OrganizationId = organizationId;
         }
 
-        public void SetRoleAdmin(System.Guid userId, System.Guid organizationId)
+        public void SetRoleAdmin(Guid userId, Guid organizationId)
         {
             if (UserId == userId && Role == RoleInOrganization.Role.None)
             {
@@ -37,21 +37,21 @@ namespace DotNetBoilerplate.Core.Employees
         }
 
         public static Employee Create(
-            System.Guid userId,
-            System.Guid organizationId,
+            Guid userId,
+            Guid organizationId,
             RoleInOrganization.Role role
         )
         {
             return new Employee
             {
-                Id = System.Guid.NewGuid(),
+                Id = Guid.NewGuid(),
                 UserId = userId,
                 OrganizationId = organizationId,
                 Role = role
             };
         }
 
-        public void UserInOrganization(System.Guid userId, System.Guid organizationId)
+        public void UserInOrganization(Guid userId, Guid organizationId)
         {
             if (UserId == userId && Role != RoleInOrganization.Role.None && OrganizationId != organizationId)
                 throw new UserInOrganizationException();
