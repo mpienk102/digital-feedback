@@ -24,5 +24,10 @@ namespace DotNetBoilerplate.Infrastructure.DAL.Repositories
         {
             return Task.FromResult(questions);
         }
+        public Task<IEnumerable<Question>> GetQuestionsByFormIdAsync(Guid formId, CancellationToken ct)
+        {
+            var result = questions.Where(q => q.FormId == formId).ToList();
+            return Task.FromResult((IEnumerable<Question>)result);
+        }
     }
 }
