@@ -15,7 +15,7 @@ namespace DotNetBoilerplate.Application.Questions.Create
         IQuestionRepository questionRepository,
         IContext context,
         IClock clock
-    ) : ICommandHandler<CreateQuestionCommand,Guid>
+    ) : ICommandHandler<CreateQuestionCommand, Guid>
     {
         public async Task<Guid> HandleAsync(CreateQuestionCommand command)
         {
@@ -23,7 +23,7 @@ namespace DotNetBoilerplate.Application.Questions.Create
                 command.formId,
                 context.Identity.Id,
                 command.questionText,
-                QuestionTypeInForm.Type.text,
+                command.questionType,
                 clock.Now()
             );
 
