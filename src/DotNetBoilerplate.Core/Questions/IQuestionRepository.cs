@@ -14,5 +14,6 @@ namespace DotNetBoilerplate.Core.Questions
         Task AddAsync(Question question);
 
         Task<IEnumerable<Question>> GetQuestionsByFormIdAsync(Guid formId, CancellationToken ct);
+        Task<QuestionTypeInForm.Type?> GetQuestionTypeAsync(Guid questionId);
     }
 }

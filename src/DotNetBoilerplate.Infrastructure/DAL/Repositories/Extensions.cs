@@ -5,6 +5,7 @@ using DotNetBoilerplate.Core.Users;
 using DotNetBoilerplate.Core.Forms;
 using DotNetBoilerplate.Core.Questions;
 using Microsoft.Extensions.DependencyInjection;
+using DotNetBoilerplate.Core.Answers;
 
 namespace DotNetBoilerplate.Infrastructure.DAL.Repositories;
 
@@ -23,6 +24,8 @@ internal static class Extensions
         services.AddSingleton<IFormRepository, InMemoryFormRepository>(); 
 
         services.AddSingleton<IQuestionRepository, InMemoryQuestionRepository>(); 
+
+        services.AddSingleton<IAnswerRepository, InMemoryAnswerRepository>();
 
         return services;
     }
