@@ -9,7 +9,7 @@ public class Organization
     {
     }
 
-    public System.Guid Id { get; private set; }
+    public Guid Id { get; private set; }
     public string Name { get; private set; }
     public Guid OwnerId { get; private set; }
 
