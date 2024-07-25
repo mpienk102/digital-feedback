@@ -29,5 +29,10 @@ namespace DotNetBoilerplate.Infrastructure.DAL.Repositories
             var result = questions.Where(q => q.FormId == formId).ToList();
             return Task.FromResult((IEnumerable<Question>)result);
         }
+        public async Task<QuestionTypeInForm.Type?> GetQuestionTypeAsync(Guid questionId)
+        {
+            var question = await GetByIdAsync(questionId);
+            return question?.QuestionType;
+        }
     }
 }

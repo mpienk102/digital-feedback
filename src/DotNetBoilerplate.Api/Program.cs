@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using DotNetBoilerplate.Api.Answers;
 using DotNetBoilerplate.Api.Employees;
 using DotNetBoilerplate.Api.Forms;
 using DotNetBoilerplate.Api.Organizations;
@@ -29,6 +30,8 @@ app.MapOrganizationsEndpoints();
 app.MapProjectsEndpoints();
 
 app.MapEmployeesEndpoints();
+
+app.MapAnswersEndpoints();
 
 app.UseInfrastructure();
 
