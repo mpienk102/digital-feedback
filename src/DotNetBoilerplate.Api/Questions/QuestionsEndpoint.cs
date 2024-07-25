@@ -12,7 +12,8 @@ namespace DotNetBoilerplate.Api.Questions
             var group = app.MapGroup(BasePath).WithTags(Tags);
 
             group
-                .MapEndpoint<CreateQuestionEndpoint>();
+                .MapEndpoint<CreateQuestionEndpoint>()
+                .MapEndpoint<GetQuestionsByFormIdEndpoint>();
         }
     }
 }
