@@ -1,6 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using DotNetBoilerplate.Application.Forms.Create;
+using DotNetBoilerplate.Core.Employees;
+using DotNetBoilerplate.Core.Forms;
 using DotNetBoilerplate.Shared.Abstractions.Commands;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,7 +24,7 @@ namespace DotNetBoilerplate.Api.Forms
             CancellationToken ct
         )
         {
-            var command = new CreateFormCommand(request.Name, request.Description);
+            var command = new CreateFormCommand(request.Name, request.Description, request.ProjectId);
 
             var result = await commandDispatcher
                 .DispatchAsync<CreateFormCommand, Guid>(command, ct);
@@ -29,14 +32,13 @@ namespace DotNetBoilerplate.Api.Forms
             return TypedResults.Ok(new Response(result));
         }
 
-        internal sealed record Response(
-            Guid Id
-        );
+        internal sealed record Response(Guid Id);
 
         private sealed class Request
         {
-            [Required] public string Name { get; set; }
-            [Required] public string Description { get; set; }
+            [Required] public string Name { get; init; }
+            [Required] public string Description { get; init; }
+            [Required] public Guid ProjectId { get; init; }
         }
     }
 }

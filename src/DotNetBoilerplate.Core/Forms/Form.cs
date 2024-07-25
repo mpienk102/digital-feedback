@@ -1,5 +1,4 @@
-﻿
-using DotNetBoilerplate.Core.Employees;
+﻿using DotNetBoilerplate.Core.Employees;
 using DotNetBoilerplate.Core.Organizations;
 using DotNetBoilerplate.Core.Users;
 
@@ -14,6 +13,7 @@ namespace DotNetBoilerplate.Core.Forms
         public string Description { get; private set; }
 
         public Guid CreatorId { get; private set; }
+        public Guid ProjectId { get; private set; }
 
         public DateTimeOffset CreatedAt { get; private set; }
 
@@ -21,6 +21,7 @@ namespace DotNetBoilerplate.Core.Forms
             string name,
             string description,
             Guid userId,
+            Guid projectId,
             DateTimeOffset now
             )
         {
@@ -30,6 +31,7 @@ namespace DotNetBoilerplate.Core.Forms
                 Name = name,
                 Description = description,
                 CreatorId = userId,
+                ProjectId = projectId,
                 CreatedAt = now
             };
         }
